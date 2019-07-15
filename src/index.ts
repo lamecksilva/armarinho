@@ -3,6 +3,7 @@ import express from 'express';
 
 // Importing dotenv file
 require('dotenv').config();
+import applyConfigs from './config';
 
 // Create new instance from express
 const app = express();
@@ -11,6 +12,9 @@ const app = express();
 app.get('/', (_, res) => {
 	res.send('Hello ts-node!');
 });
+
+// Apply configs
+applyConfigs(app);
 
 const PORT = process.env.PORT || 9000;
 
