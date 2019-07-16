@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  server:
+    container_name: ARMARINHO_SERVER
+    build: '.'
+    volumes:
+      - ./:/node-app
+      - ./node_modules:/node-app/node_modules
+    environment:
+      - NODE_ENV=development
+      - PORT=9000
+    depends_on:
+      - db
+    links:
+      - db
+    ports:
+      - '9000:9000'
+
+  db:
+    image: 'mongo'
+    container_name: ARMARINHO_MONGODB
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./data/db:/data/db
+
+volumes:
+  node_modules:
