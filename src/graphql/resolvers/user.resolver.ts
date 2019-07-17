@@ -1,9 +1,10 @@
 // import { Request } from 'express';
-import { User } from "../../types/user"
+import { User } from '../../types/user';
 
 let users: Array<User> = [];
 
 export default {
+	// Return all users
 	users: () => {
 		console.log('Return users');
 
@@ -11,6 +12,7 @@ export default {
 			return { ...user, password: null };
 		});
 	},
+	// Create a user
 	createUser: async (args: any) => {
 		console.log(args.data);
 

@@ -1,9 +1,9 @@
-<h1 align="center">Welcome to armarinho 👋</h1>
+<h1 align="center">Welcome to <i>armarinho</i> 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
 </p>
 
-> Project to learn dev stuff
+> Project to learn dev stuff and play with strange technologies
 
 ## Install
 
@@ -17,15 +17,17 @@ yarn
 yarn start
 ```
 
+Run in development mode
+
+```sh
+yarn dev
+```
+
 ## Author
 
 👤 **Lameck**
 
 - Github: [@lamecksilva](https://github.com/lamecksilva)
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
 
 ---
 
