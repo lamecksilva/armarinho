@@ -16,6 +16,7 @@ app.get('/', (_, res: Response) => {
 // Apply configs
 applyConfigs(app);
 
+// Using graphql server for express
 app.use(
 	'/graphql',
 	graphqlHTTP({
@@ -25,6 +26,7 @@ app.use(
 	})
 );
 
+// PORT of express app
 const PORT = process.env.PORT || 9000;
 
 app.listen(PORT, () => {

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+// Function to connect app to MongoDB
 export default (): void => {
 	const MONGO_URL =
 		process.env.MONGO_URL || 'mongo://localhost:27017/armarinho';
@@ -11,6 +12,7 @@ export default (): void => {
 	mongoose.connect(MONGO_URL, { useNewUrlParser: true });
 	const db = mongoose.connection;
 
+	// Handling events
 	db.on('error', err => {
 		console.error('Erro na conexão com o MongoDB: ');
 		throw new Error(err);

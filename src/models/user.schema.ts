@@ -1,5 +1,6 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
+// User Schema
 const UserSchema: Schema = new Schema(
 	{
 		name: {
