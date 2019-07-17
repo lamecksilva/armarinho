@@ -2,25 +2,23 @@ import { buildSchema } from 'graphql';
 
 export default buildSchema(`
 	type User {
+    _id: ID!
 		name: String!
-		age: Int!
-		email: String
+		email: String!
 	}
 
-	input UserInput {
+	input CreateUserInput {
 		name: String!
-		age: Int!
-		email: String
+    email: String!
+    password: String!
 	}
 
   type RootQuery {
-		str: String!	
-		user: User!
+		users: [User!]!
 	}
 
 	type RootMutation {
-		changeStr(newStr: String): String
-		changeUserData(newUser: UserInput): User
+		createUser(data: CreateUserInput): User
 	}
 
 	schema {
