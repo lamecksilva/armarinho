@@ -4,7 +4,9 @@
 	"description": "Project to learn dev stuff",
 	"main": "index.ts",
 	"scripts": {
-		"dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/index.ts",
+		"start": "ts-node src/index.tx",
+		"dev": "nodemon -e ts -w ./src -x npm run watch",
+		"watch": "ts-node src/index.ts",
 		"test": "jest --no-cache",
 		"build": "tsc",
 		"prod": "yarn build && node dist/index.js"
