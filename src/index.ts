@@ -28,7 +28,7 @@ app.use(
 const PORT = process.env.PORT || 9000;
 
 app.listen(PORT, () => {
-	console.log(`[SERVER] Running at http://localhost:${PORT}`);
+	console.log(`Servidor rodando com sucesso em: http://localhost:${PORT}`);
 });
 
 // Exporting server (this is for tests)
