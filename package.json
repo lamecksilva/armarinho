@@ -4,7 +4,7 @@
 	"description": "Project to learn dev stuff",
 	"main": "index.ts",
 	"scripts": {
-		"dev": "nodemon --watch 'src/' --exec \"ts-node src/index.ts\" -e ts",
+		"dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/index.ts",
 		"test": "jest --no-cache",
 		"build": "tsc",
 		"prod": "yarn build && node dist/index.js"
@@ -25,6 +25,7 @@
 	},
 	"dependencies": {
 		"@types/express": "^4.17.0",
+		"@types/graphql": "^14.2.2",
 		"@types/mongoose": "^5.5.8",
 		"dotenv": "^8.0.0",
 		"express": "^4.17.1",
