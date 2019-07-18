@@ -1,5 +1,7 @@
+import { CreateUserInput } from '../types/user';
 import { User } from '../models';
 
+// Get all users from DB
 export const getUsers = async () => {
 	console.debug('getUsers');
 
@@ -7,13 +9,27 @@ export const getUsers = async () => {
 		const users = await User.find({});
 
 		return users.map(u => {
-			u._id, u.name, u.email;
+			return { ...u._doc, password: null };
 		});
 	} catch (e) {
 		throw new Error(e);
 		console.error('Erro na função getUsers');
 	}
 };
-export const teste = (): void => {
-	console.log('Hello');
+
+// Creates a new user
+export const createUser = async ({ newUserData }: CreateUserInput) => {
+	try {
+		// Create a new User from Model
+		const newUser = await new User(newUserData);
+
+		// Saving in the database
+		const result = await newUser.save();
+
+		// return created user
+		return { ...result._doc, password: null, __v: null };
+	} catch (e) {
+		throw new Error(e);
+		console.log('Erro na funçao createUser');
+	}
 };

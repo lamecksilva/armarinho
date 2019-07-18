@@ -25,6 +25,7 @@ interface User extends Document {
 	name: String;
 	email: String;
 	password: String;
+	_doc?: Object;
 }
 
 export default mongoose.model<User>('User', UserSchema);

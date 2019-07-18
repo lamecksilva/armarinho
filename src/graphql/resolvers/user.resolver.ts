@@ -1,18 +1,18 @@
-import { getUsers } from '../../services';
+import { getUsers, createUser } from '../../services';
+import { CreateUserInput } from '../../types/user';
 
 export default {
 	// Return all users
 	users: async () => {
-		const users = await getUsers();
-		console.log(users);
-
 		console.log('Return users');
+		const users = await getUsers();
+
 		return users;
 	},
 	// Create a user
-	createUser: async (args: any) => {
-		console.log(args.data);
+	createUser: async (args: CreateUserInput) => {
+		const newUser = await createUser(args);
 
-		return { _id: 'randomvalue', ...args.data };
+		return newUser;
 	}
 };

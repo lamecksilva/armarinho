@@ -31,6 +31,7 @@ const PORT = process.env.PORT || 9000;
 
 app.listen(PORT, () => {
 	console.log(`Servidor rodando com sucesso em: http://localhost:${PORT}`);
+	console.log(`Grahiql rodando em: http:localhost:${PORT}/graphql`);
 });
 
 // Exporting server (this is for tests)

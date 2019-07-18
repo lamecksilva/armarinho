@@ -47,7 +47,7 @@ export default buildSchema(`
 	}
 
 	type RootMutation {
-		createUser(data: CreateUserInput): User
+		createUser(newUserData: CreateUserInput): User
 	}
 
 	schema {
