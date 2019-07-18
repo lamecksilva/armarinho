@@ -1,22 +1,17 @@
-// import { Request } from 'express';
-import { User } from '../../types/user';
-
-let users: Array<User> = [];
+import { getUsers } from '../../services';
 
 export default {
 	// Return all users
-	users: () => {
-		console.log('Return users');
+	users: async () => {
+		const users = await getUsers();
+		console.log(users);
 
-		return users.map(user => {
-			return { ...user, password: null };
-		});
+		console.log('Return users');
+		return users;
 	},
 	// Create a user
 	createUser: async (args: any) => {
 		console.log(args.data);
-
-		users.push({ ...args.data, _id: 'randomvalue' });
 
 		return { _id: 'randomvalue', ...args.data };
 	}

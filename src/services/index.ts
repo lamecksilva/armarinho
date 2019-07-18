@@ -1,1 +1,1 @@
-// Services coming soon
+export * from './user.service';
