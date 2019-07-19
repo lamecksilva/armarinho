@@ -1,16 +1,22 @@
-interface Person {
-	name: string;
-	age: number;
+let a: string = `
+type User {
+	name: String
+	email: String
 }
+`;
 
-const printPerson = (person: Person): Person => {
-	console.log(`Name: ${person.name}, Age: ${person.age}`);
+let b: string = `
+input UserInput {
+	name: String
+	password: String
+}
+`;
 
-	return person;
-};
+let c: string = `
+type Person {
+	name: String
+	age: Int
+}`;
 
-let myPerson: Person = {
-	name: 'Lameco Sanderson',
-	age: 18
-};
-printPerson(myPerson);
+let r = ''.concat(a, b, c);
+console.log(r);

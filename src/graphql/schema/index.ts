@@ -43,7 +43,7 @@ export default buildSchema(`
 	}
 
   type RootQuery {
-		users: [User!]!
+		users(id: String): [User!]!
 	}
 
 	type RootMutation {

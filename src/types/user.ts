@@ -13,3 +13,7 @@ export interface CreateUserInput {
 		password: string;
 	};
 }
+
+export interface UserQuery {
+	id: string;
+}

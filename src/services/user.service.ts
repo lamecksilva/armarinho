@@ -2,11 +2,13 @@ import { CreateUserInput } from '../types/user';
 import { User } from '../models';
 
 // Get all users from DB
-export const getUsers = async () => {
-	console.debug('getUsers');
-
+export const getUsers = async (id: string) => {
 	try {
-		const users = await User.find({});
+		let users;
+
+		id !== undefined
+			? (users = await User.find({ _id: id }))
+			: (users = await User.find({}));
 
 		return users.map(u => {
 			return { ...u._doc, password: null };

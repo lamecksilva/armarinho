@@ -1,11 +1,10 @@
 import { getUsers, createUser } from '../../services';
-import { CreateUserInput } from '../../types/user';
+import { CreateUserInput, UserQuery } from '../../types/user';
 
 export default {
 	// Return all users
-	users: async () => {
-		console.log('Return users');
-		const users = await getUsers();
+	users: async (query: UserQuery) => {
+		const users = await getUsers(query.id);
 
 		return users;
 	},
