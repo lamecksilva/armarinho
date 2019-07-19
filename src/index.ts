@@ -4,7 +4,7 @@ import graphqlHTTP from 'express-graphql';
 
 import applyConfigs from './config';
 import graphQlSchema from './graphql/schema';
-import graphQlResolvers from './graphql/resolvers';
+// import graphQlResolvers from './graphql/resolvers';
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.use(
 	'/graphql',
 	graphqlHTTP({
 		schema: graphQlSchema,
-		rootValue: graphQlResolvers,
+		// rootValue: graphQlResolvers,
 		graphiql: process.env.NODE_ENV === 'development'
 	})
 );

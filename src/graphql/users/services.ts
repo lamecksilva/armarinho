@@ -1,13 +1,17 @@
-import { CreateUserInput } from '../types/user';
-import { User } from '../models';
+/**
+ * These functions contain the business logic of the API
+ */
+
+import { CreateUserInput } from './types';
+import User from './model';
 
 // Get all users from DB
-export const getUsers = async (id: string) => {
+export const getUsers = async (props: any) => {
 	try {
 		let users;
 
-		id !== undefined
-			? (users = await User.find({ _id: id }))
+		props.id !== undefined
+			? (users = await User.find({ _id: props.id }))
 			: (users = await User.find({}));
 
 		return users.map(u => {
@@ -20,10 +24,10 @@ export const getUsers = async (id: string) => {
 };
 
 // Creates a new user
-export const createUser = async ({ newUserData }: CreateUserInput) => {
+export const saveUser = async ({ name, email, password }: CreateUserInput) => {
 	try {
 		// Create a new User from Model
-		const newUser = await new User(newUserData);
+		const newUser = await new User({ name, email, password });
 
 		// Saving in the database
 		const result = await newUser.save();
@@ -32,6 +36,6 @@ export const createUser = async ({ newUserData }: CreateUserInput) => {
 		return { ...result._doc, password: null, __v: null };
 	} catch (e) {
 		throw new Error(e);
-		console.log('Erro na funçao createUser');
+		console.log('Erro na funçao saveUser');
 	}
 };

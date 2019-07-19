@@ -1,31 +1,31 @@
-import mongoose, { Schema, Document } from 'mongoose';
+// import mongoose, { Schema, Document } from 'mongoose';
 
-// User Schema
-const UserSchema: Schema = new Schema(
-	{
-		name: {
-			type: String,
-			required: true
-		},
-		email: {
-			type: String,
-			required: true
-		},
-		password: {
-			type: String,
-			required: true
-		}
-	},
-	{
-		timestamps: true
-	}
-);
+// // User Schema
+// const UserSchema: Schema = new Schema(
+// 	{
+// 		name: {
+// 			type: String,
+// 			required: true
+// 		},
+// 		email: {
+// 			type: String,
+// 			required: true
+// 		},
+// 		password: {
+// 			type: String,
+// 			required: true
+// 		}
+// 	},
+// 	{
+// 		timestamps: true
+// 	}
+// );
 
-interface User extends Document {
-	name: String;
-	email: String;
-	password: String;
-	_doc?: Object;
-}
+// interface User extends Document {
+// 	name: String;
+// 	email: String;
+// 	password: String;
+// 	_doc?: Object;
+// }
 
-export default mongoose.model<User>('User', UserSchema);
+// export default mongoose.model<User>('User', UserSchema);

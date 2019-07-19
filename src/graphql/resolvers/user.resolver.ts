@@ -1,17 +1,18 @@
-import { getUsers, createUser } from '../../services';
-import { CreateUserInput, UserQuery } from '../../types/user';
+// // import { getUsers, saveUser } from '../../services';
+// import { CreateUserInput, UserQuery } from '../../types/user';
 
-export default {
-	// Return all users
-	users: async (query: UserQuery) => {
-		const users = await getUsers(query.id);
+// // Return all users
+// export default {
+// 	users: async (query: UserQuery) => {
+// 		const users = await getUsers(query.id);
 
-		return users;
-	},
-	// Create a user
-	createUser: async (args: CreateUserInput) => {
-		const newUser = await createUser(args);
+// 		return users;
+// 	},
 
-		return newUser;
-	}
-};
+// 	// Create a user
+// 	createUser: async (args: CreateUserInput) => {
+// 		const newUser = await saveUser(args);
+
+// 		return newUser;
+// 	}
+// };
