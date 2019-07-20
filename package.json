@@ -1,52 +1,52 @@
 {
-	"name": "armarinho",
-	"version": "0.1.0",
-	"description": "Project to learn dev stuff",
-	"main": "index.ts",
-	"scripts": {
-		"start": "ts-node src/index.ts",
-		"dev": "nodemon -e ts -w ./src -x npm run watch",
-		"watch": "ts-node src/index.ts",
-		"test": "jest --no-cache",
-		"build": "tsc",
-		"prod": "yarn build && node dist/index.js"
-	},
-	"repository": "https://github.com/lamecksilva/armarinho.git",
-	"author": "Lameck",
-	"license": "MIT",
-	"private": false,
-	"devDependencies": {
-		"@types/jest": "^24.0.15",
-		"@types/supertest": "^2.0.8",
-		"jest": "^24.8.0",
-		"nodemon": "^1.19.1",
-		"supertest": "^4.0.2",
-		"ts-jest": "^24.0.2",
-		"ts-node": "^8.3.0",
-		"typescript": "^3.5.3"
-	},
-	"dependencies": {
-		"@types/express": "^4.17.0",
-		"@types/graphql": "^14.2.2",
-		"@types/mongoose": "^5.5.8",
-		"dotenv": "^8.0.0",
-		"express": "^4.17.1",
-		"express-graphql": "^0.9.0",
-		"graphql": "^14.4.2",
-		"mongoose": "^5.6.4"
-	},
-	"jest": {
-		"transform": {
-			"^.+\\.ts$": "ts-jest"
-		},
-		"testRegex": "\\.test\\.ts",
-		"moduleFileExtensions": [
-			"ts",
-			"tsx",
-			"js",
-			"jsx",
-			"json",
-			"node"
-		]
-	}
+  "name": "armarinho",
+  "version": "0.1.0",
+  "description": "Project to learn dev stuff",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon --watch 'src/**/*.ts' -x npm run watch --scripts-prepend-node-path",
+    "watch": "ts-node src/index.ts",
+    "test": "jest --no-cache",
+    "build": "tsc",
+    "prod": "yarn build && node dist/index.js"
+  },
+  "repository": "https://github.com/lamecksilva/armarinho.git",
+  "author": "Lameck",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "@types/supertest": "^2.0.8",
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.0",
+    "@types/graphql": "^14.2.2",
+    "@types/mongoose": "^5.5.8",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql": "^14.4.2",
+    "mongoose": "^5.6.4"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "testRegex": "\\.test\\.ts",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
 }
