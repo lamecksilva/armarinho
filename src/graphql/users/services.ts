@@ -1,7 +1,6 @@
 /**
  * These functions contain the business logic of the API
  */
-
 import { CreateUserInput } from './types';
 import User from './model';
 
@@ -33,9 +32,23 @@ export const saveUser = async ({ name, email, password }: CreateUserInput) => {
 		const result = await newUser.save();
 
 		// return created user
-		return { ...result._doc, password: null, __v: null };
+		return { ...result._doc, password: null };
 	} catch (e) {
 		throw new Error(e);
 		console.log('Erro na funçao saveUser');
+	}
+};
+
+// Delete user
+export const removeUser = async (props: any) => {
+	try {
+		let user: any;
+
+		user = await User.findOneAndDelete({ _id: props.id });
+
+		return { ...user._doc, password: null };
+	} catch (e) {
+		throw new Error(e);
+		console.log('Erro na função removeUser');
 	}
 };

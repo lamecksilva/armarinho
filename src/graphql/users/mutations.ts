@@ -3,6 +3,7 @@ import resolvers from './resolvers';
 import User from './type';
 
 export default {
+	// Crate and save a new user
 	createUser: {
 		args: {
 			name: {
@@ -19,6 +20,18 @@ export default {
 			}
 		},
 		resolve: resolvers.createUser,
+		type: User
+	},
+
+	// Delete a user from database
+	deleteUser: {
+		args: {
+			id: {
+				description: "The user's id.",
+				type: new GraphQLNonNull(GraphQLID)
+			}
+		},
+		resolve: resolvers.deleteUser,
 		type: User
 	}
 };

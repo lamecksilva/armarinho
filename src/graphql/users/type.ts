@@ -5,7 +5,6 @@
  *    name: String!
  *    email: String!
  * }
- *
  */
 
 import {
