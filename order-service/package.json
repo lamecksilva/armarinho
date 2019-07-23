@@ -1,0 +1,12 @@
+{
+  "name": "order-service",
+  "version": "0.1.0",
+  "description": "A order service for micro-services store app",
+  "main": "index.js",
+  "author": "Lameck",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
