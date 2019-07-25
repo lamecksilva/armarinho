@@ -12,7 +12,10 @@
 	"license": "MIT",
 	"private": false,
 	"devDependencies": {
+		"@types/express": "^4.17.0",
+		"@types/graphql": "^14.2.2",
 		"@types/jest": "^24.0.15",
+		"@types/mongoose": "^5.5.8",
 		"@types/supertest": "^2.0.8",
 		"jest": "^24.8.0",
 		"nodemon": "^1.19.1",
@@ -22,9 +25,7 @@
 		"typescript": "^3.5.3"
 	},
 	"dependencies": {
-		"@types/express": "^4.17.0",
-		"@types/graphql": "^14.2.2",
-		"@types/mongoose": "^5.5.8",
+		"bcrypt": "^3.0.6",
 		"dotenv": "^8.0.0",
 		"express": "^4.17.1",
 		"express-graphql": "^0.9.0",
