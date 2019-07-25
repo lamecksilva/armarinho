@@ -10,7 +10,7 @@ const app = express();
 
 // Test Route
 app.get('/', (_, res: Response) => {
-	res.send('Hello ts-node!');
+	res.send('Hello User Service!');
 });
 
 // Apply configs
@@ -27,10 +27,10 @@ app.use(
 );
 
 // PORT of express app
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT || 9001;
 
 app.listen(PORT, () => {
-	console.log(`Servidor rodando com sucesso em: http://localhost:${PORT}`);
+	console.log(`User service com sucesso em: http://localhost:${PORT}`);
 	console.log(`Grahiql rodando em: http:localhost:${PORT}/graphql`);
 });
 

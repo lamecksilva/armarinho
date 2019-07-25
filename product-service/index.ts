@@ -4,6 +4,6 @@ const app = express();
 
 app.get('/', (_, res: Response) => res.send('Hello from Product-service'));
 
-const PORT = process.env.PORT || 9003;
+const PORT = process.env.PORT || 9002;
 
 app.listen(PORT, () => console.log(`Product-Service running on port: ${PORT}`));

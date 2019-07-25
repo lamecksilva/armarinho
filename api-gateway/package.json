@@ -1,0 +1,19 @@
+{
+  "name": "api-gateway",
+  "version": "0.1.0",
+  "main": "index.ts",
+  "author": "Lameck",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-http-proxy": "^1.5.1",
+    "helmet": "^3.20.0",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "@types/express-http-proxy": "^1.5.11",
+    "@types/helmet": "^0.0.43",
+    "@types/morgan": "^1.7.36"
+  }
+}

@@ -23,6 +23,13 @@ Run in development mode
 yarn dev
 ```
 
+_OBS:_ I'm Using pm2 to start and run the services, e.g:
+
+```sh
+cd user-service
+pm2 start --name "Armarinho-User-Service" src/index.ts --watch
+```
+
 ## Author
 
 👤 **Lameck**
