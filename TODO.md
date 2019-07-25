@@ -6,3 +6,4 @@
 - [ ] Logger
 - [ ] Desempenho (APM)
 - [ ] ESLint
+- [ ] Camada (service) de Validação (Token)

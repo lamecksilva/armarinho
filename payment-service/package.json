@@ -1,11 +1,10 @@
 {
-  "name": "files-service",
+  "name": "payment-service",
   "version": "0.1.0",
-  "description": "A server for serve and store files",
+  "description": "A payment service for armarinho",
   "main": "index.ts",
   "author": "Lameck",
   "license": "MIT",
-  "private": false,
   "dependencies": {
     "express": "^4.17.1"
   },
