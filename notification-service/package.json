@@ -1,0 +1,11 @@
+{
+  "name": "notification-service",
+  "version": "0.1.0",
+  "description": "A notification service for armarinho",
+  "main": "index.ts",
+  "author": "Lameck",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
