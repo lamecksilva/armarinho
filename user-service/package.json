@@ -1,0 +1,17 @@
+{
+  "name": "user-service",
+  "version": "0.1.0",
+  "description": "A user service for microservices app",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node index.ts",
+    "dev": "nodemon --watch 'src/**/*.ts' -x npm run watch --scripts-prepend-node-path",
+    "watch": "ts-node src/index.ts"
+  },
+  "author": "Lamecksilva",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

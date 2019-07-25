@@ -1,9 +1,8 @@
 {
-  "name": "product-service",
+  "name": "files-service",
   "version": "0.1.0",
-  "description": "A product service for micro-services store app",
-  "main": "index.js",
-  "scripts": {},
+  "description": "A server for serve and store files",
+  "main": "index.ts",
   "author": "Lameck",
   "license": "MIT",
   "private": false,
