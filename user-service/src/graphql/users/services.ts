@@ -25,6 +25,7 @@ export const getUsers = async (props: any) => {
 // Creates a new user
 export const saveUser = async ({ name, email, password }: CreateUserInput) => {
 	try {
+		// let errors = []
 		// Create a new User from Model
 		const newUser = await new User({ name, email, password });
 

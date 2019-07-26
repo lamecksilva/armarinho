@@ -1,9 +1,8 @@
-import { Express } from 'express';
-import applyRoutes from './routes';
+// import { Express } from 'express';
 import db from './db';
 
-export default async (app: Express) => {
-	applyRoutes(app);
+export default async (/* app: Express */) => {
+	// applyRoutes(app);
 
 	await db();
 };

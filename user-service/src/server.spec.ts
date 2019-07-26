@@ -1,6 +1,6 @@
 import req from 'supertest';
 
-import server from './index';
+import server from '../index';
 
 test('[GET] /', async () => {
 	const res = await req(server).get('/');

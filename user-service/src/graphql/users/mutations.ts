@@ -1,10 +1,15 @@
-import { GraphQLID, GraphQLNonNull, GraphQLString } from 'graphql';
+import {
+	GraphQLID,
+	GraphQLNonNull,
+	GraphQLString,
+} from 'graphql';
 import resolvers from './resolvers';
-import User from './type';
+import { UserType, CreateUserResult } from './types';
 
 export default {
 	// Crate and save a new user
 	createUser: {
+		type: CreateUserResult,
 		args: {
 			name: {
 				description: "The users's name.",
@@ -19,8 +24,7 @@ export default {
 				type: new GraphQLNonNull(GraphQLString)
 			}
 		},
-		resolve: resolvers.createUser,
-		type: User
+		resolve: resolvers.createUser
 	},
 
 	// Delete a user from database
@@ -32,6 +36,6 @@ export default {
 			}
 		},
 		resolve: resolvers.deleteUser,
-		type: User
+		type: UserType
 	}
 };

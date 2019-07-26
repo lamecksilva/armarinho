@@ -1,20 +1,25 @@
 require('dotenv').config();
 import express, { Response } from 'express';
 import graphqlHTTP from 'express-graphql';
+import morgan from 'morgan';
 
-import applyConfigs from './config';
-import graphQlSchema from './graphql/schema';
+import applyConfigs from './src/config';
+import graphQlSchema from './src/graphql/schema';
 // import graphQlResolvers from './graphql/resolvers';
 
 const app = express();
+
+// Apply configs
+applyConfigs();
+
+app.use(
+	morgan(':method :url :status :res[content-length] - :response-time ms')
+);
 
 // Test Route
 app.get('/', (_, res: Response) => {
 	res.send('Hello User Service!');
 });
-
-// Apply configs
-applyConfigs(app);
 
 // Using graphql server for express
 app.use(
@@ -31,7 +36,7 @@ const PORT = process.env.PORT || 9001;
 
 app.listen(PORT, () => {
 	console.log(`User service com sucesso em: http://localhost:${PORT}`);
-	console.log(`Grahiql rodando em: http:localhost:${PORT}/graphql`);
+	console.log(`Graphql rodando em: http:localhost:${PORT}/graphql`);
 });
 
 // Exporting server (this is for tests)
