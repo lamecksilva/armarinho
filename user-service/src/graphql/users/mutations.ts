@@ -1,10 +1,6 @@
-import {
-	GraphQLID,
-	GraphQLNonNull,
-	GraphQLString,
-} from 'graphql';
+import { GraphQLID, GraphQLNonNull, GraphQLString } from 'graphql';
 import resolvers from './resolvers';
-import { UserType, CreateUserResult } from './types';
+import { UserType, CreateUserResult, EditUserResult } from './types';
 
 export default {
 	// Crate and save a new user
@@ -13,18 +9,42 @@ export default {
 		args: {
 			name: {
 				description: "The users's name.",
-				type: new GraphQLNonNull(GraphQLID)
+				type: new GraphQLNonNull(GraphQLString)
 			},
 			email: {
 				description: "The users's email.",
 				type: new GraphQLNonNull(GraphQLString)
 			},
 			password: {
-				description: "The users's account password",
+				description: "The user's account password",
+				type: new GraphQLNonNull(GraphQLString)
+			},
+			password2: {
+				description: 'Confirm password',
 				type: new GraphQLNonNull(GraphQLString)
 			}
 		},
 		resolve: resolvers.createUser
+	},
+
+	// Edit a user from database
+	editUser: {
+		type: EditUserResult,
+		args: {
+			id: {
+				description: "The user's ID",
+				type: new GraphQLNonNull(GraphQLString)
+			},
+			name: {
+				description: "The user's name.",
+				type: GraphQLString
+			},
+			email: {
+				description: "The users's email.",
+				type: GraphQLString
+			}
+		},
+		resolve: resolvers.editUser
 	},
 
 	// Delete a user from database

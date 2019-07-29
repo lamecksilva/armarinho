@@ -1,17 +1,9 @@
-import { isEmail, isLength } from 'validator';
+import { isEmail, isLength, equals as isEquals } from 'validator';
 
 import isEmpty from '../../utils/is-empty';
+import { ErrorType, ValidationResponse } from './types';
 
-interface ErrorType {
-	key: string;
-	message: string;
-}
-
-interface ValidationResponse {
-	isValid: boolean;
-	errors: Array<ErrorType>;
-}
-
+// ============================= Validate the create user input ===================================
 export const validateCreateUserInput = (data: any): ValidationResponse => {
 	let errors: Array<ErrorType> = [];
 
@@ -28,6 +20,13 @@ export const validateCreateUserInput = (data: any): ValidationResponse => {
 		errors.push({
 			key: 'password',
 			message: 'O campo senha não pode ser vazio'
+		});
+	}
+
+	if (isEmpty(data.password2)) {
+		errors.push({
+			key: 'password2',
+			message: 'O campo de confirmar senha não pode ser vazio'
 		});
 	}
 
@@ -48,6 +47,35 @@ export const validateCreateUserInput = (data: any): ValidationResponse => {
 			key: 'password',
 			message: 'A senha deve conter entre 6 e 40 caracteres'
 		});
+	}
+
+	if (!isEquals(data.password, data.password2)) {
+		errors.push({
+			key: 'password2',
+			message: 'As senhas devem ser iguais'
+		});
+	}
+
+	return { isValid: isEmpty(errors), errors };
+};
+
+// ============================= Validate edit user input =================================
+export const validateEditUserInput = (data: any) => {
+	let errors: Array<ErrorType> = [];
+
+	if (!isEmpty(data.name)) {
+		if (!isLength(data.name, { min: 2, max: 40 })) {
+			errors.push({
+				key: 'name',
+				message: 'O nome deve conter entre 2 e 40 caracteres'
+			});
+		}
+	}
+
+	if (!isEmpty(data.email)) {
+		if (!isEmail(data.email)) {
+			errors.push({ key: 'email', message: 'Endereço de email inválido' });
+		}
 	}
 
 	return { isValid: isEmpty(errors), errors };

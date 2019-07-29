@@ -1,4 +1,4 @@
-import { getUsers, saveUser, removeUser } from './services';
+import { getUsers, saveUser, removeUser, editUser } from './services';
 import { validateCreateUserInput } from './validations';
 
 export default {
@@ -25,6 +25,16 @@ export default {
 
 	// Get all users or find one
 	users: (_: any, props: any) => getUsers(props),
+
+	// Update a user in the database
+	editUser: async (_: any, props: any) => {
+		const { user, errors } = await editUser(props);
+
+		return {
+			user,
+			errors
+		};
+	},
 
 	// Delete a user from database
 	deleteUser: (_: any, props: any) => removeUser(props)

@@ -10,7 +10,10 @@ export default (): void => {
 		throw new Error('MONGO_URL não declarada');
 	}
 
-	mongoose.connect(MONGO_URL, { useNewUrlParser: true });
+	mongoose.connect(MONGO_URL, {
+		useNewUrlParser: true,
+		useFindAndModify: false
+	});
 	const db = mongoose.connection;
 
 	// Handling events

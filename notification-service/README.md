@@ -6,9 +6,8 @@
 
 - Send Email for payment success
 
-> POST /api/payment
-
-Request:
+> POST /api/payment/success
+> Request Body:
 
 ```js
 {
@@ -16,10 +15,9 @@ Request:
     "email": "example@lsdev.com",
     "username": "Example Example"
   },
-  "paymentData: {
+  "paymentData": {
     "totalAmount": 145.65
     "currency": "brl",
-    // "method": "credit_card"
     "items": [
       {
         "name": "Camisa Lagoste Tamanho G Verde",

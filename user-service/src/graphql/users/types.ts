@@ -11,6 +11,23 @@ export interface CreateUserInput {
 	name: string;
 	email: string;
 	password: string;
+	password2: string;
+}
+
+export interface EditUserInput {
+	id: string;
+	name: string;
+	email: string;
+}
+
+export interface ErrorType {
+	key: string;
+	message: string;
+}
+
+export interface ValidationResponse {
+	isValid: boolean;
+	errors: Array<ErrorType>;
 }
 
 // GraphQl User type
@@ -59,5 +76,19 @@ export const CreateUserResult = new GraphQLObjectType({
 	fields: {
 		user: { type: UserType, description: 'The user' },
 		errors: { type: ErrorType, description: 'User errors' }
+	}
+});
+
+export const EditUserResult = new GraphQLObjectType({
+	name: 'EditUserResult',
+	fields: {
+		user: {
+			type: UserType,
+			description: 'The updated user'
+		},
+		errors: {
+			type: ErrorType,
+			description: 'Errors message'
+		}
 	}
 });

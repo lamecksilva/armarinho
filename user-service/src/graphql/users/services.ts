@@ -1,10 +1,11 @@
 /**
  * These functions contain the business logic of the API
  */
-import { CreateUserInput } from './types';
+import { CreateUserInput, EditUserInput } from './types';
+import { validateEditUserInput } from './validations';
 import User from './model';
 
-// Get all users from DB
+// ================================ Get all users from DB ===============================
 export const getUsers = async (props: any) => {
 	try {
 		let users;
@@ -22,7 +23,57 @@ export const getUsers = async (props: any) => {
 	}
 };
 
-// Creates a new user
+// =============================== Edit and save user ====================================
+export const editUser = async ({ id, email, name }: EditUserInput) => {
+	try {
+		// Validate input data
+		let { isValid, errors } = validateEditUserInput({ id, email, name });
+
+		if (!isValid) {
+			return {
+				user: null,
+				errors
+			};
+		}
+
+		if (!(await User.findOne({ _id: id }))) {
+			errors.push({
+				key: 'id',
+				message: 'ID não encontrado no banco de dados'
+			});
+
+			return { user: null, errors };
+		}
+
+		const userUpdated: any = await User.findOneAndUpdate(
+			{ _id: id },
+			{ $set: { email, name } },
+			{ new: true }
+		);
+
+		console.log({
+			user: {
+				...userUpdated._doc,
+				password: null
+			},
+			errors
+		});
+
+		return {
+			user: {
+				...userUpdated._doc,
+				password: null
+			},
+			errors
+		};
+	} catch (e) {
+		console.log(e);
+
+		throw new Error(e);
+	}
+};
+
+// ================================ Creates a new user ====================================
 export const saveUser = async ({ name, email, password }: CreateUserInput) => {
 	try {
 		// let errors = []
@@ -40,7 +91,7 @@ export const saveUser = async ({ name, email, password }: CreateUserInput) => {
 	}
 };
 
-// Delete user
+// ================================ Delete user ================================
 export const removeUser = async (props: any) => {
 	try {
 		let user: any;
