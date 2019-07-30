@@ -51,14 +51,6 @@ export const editUser = async ({ id, email, name }: EditUserInput) => {
 			{ new: true }
 		);
 
-		console.log({
-			user: {
-				...userUpdated._doc,
-				password: null
-			},
-			errors
-		});
-
 		return {
 			user: {
 				...userUpdated._doc,

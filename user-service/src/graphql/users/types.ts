@@ -6,6 +6,8 @@ import {
 	GraphQLID
 } from 'graphql';
 
+import { GraphQLDate, GraphQLDateTime } from 'graphql-iso-date';
+
 // interfaces
 export interface CreateUserInput {
 	name: string;
@@ -46,6 +48,14 @@ export const UserType = new GraphQLObjectType({
 		name: {
 			description: "The user's name",
 			type: new GraphQLNonNull(GraphQLString)
+		},
+		createdAt: {
+			description: "Date of 'birth'",
+			type: new GraphQLNonNull(GraphQLDate)
+		},
+		updatedAt: {
+			description: 'Date of Update',
+			type: new GraphQLNonNull(GraphQLDateTime)
 		}
 	}
 });
@@ -79,6 +89,7 @@ export const CreateUserResult = new GraphQLObjectType({
 	}
 });
 
+// EditUserResult type
 export const EditUserResult = new GraphQLObjectType({
 	name: 'EditUserResult',
 	fields: {
