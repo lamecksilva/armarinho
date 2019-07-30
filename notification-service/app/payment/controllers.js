@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer');
 exports.paymentSucess = async (req, res) => {
 	console.log('Payment Success');
 
+	// To test
 	const transporter = nodemailer.createTransport({
 		host: 'smtp.ethereal.email',
 		port: 587,
