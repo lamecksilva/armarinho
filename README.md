@@ -43,12 +43,13 @@ pm2 start --name "Armarinho-User-Service" src/index.ts --watch
 > _3001_: Admin (Client)
 
 > _9000_: API-gateway  
-> _9001_: User-Service  
-> _9002_: Product-Service  
-> _9003_: Order-Service  
-> _9004_: Files-Service  
-> _9005_: Notification-Service  
-> _9006_: Payment-Service
+> _9001_: Auth-Service  
+> _9002_: User-Service  
+> _9003_: Product-Service  
+> _9004_: Order-Service  
+> _9005_: Files-Service  
+> _9006_: Notification-Service  
+> _9007_: Payment-Service
 
 ## Author
 

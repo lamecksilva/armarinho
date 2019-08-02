@@ -32,7 +32,7 @@ app.use(
 );
 
 // PORT of express app
-const PORT = process.env.PORT || 9001;
+const PORT = process.env.PORT || 9002;
 
 app.listen(PORT, () => {
 	console.log(`User service com sucesso em: http://localhost:${PORT}`);
