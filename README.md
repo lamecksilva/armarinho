@@ -37,6 +37,25 @@ pm2 start --name "Armarinho-User-Service" src/index.ts --watch
 
 ![image](https://user-images.githubusercontent.com/31391753/62387716-c7b40700-b531-11e9-8984-ef26583eadb7.png)
 
+```js
+Login =>
+{
+  header: {
+    authorization: "Bearer generatedInBroserAndMobileToApiGatewayValidatesLoginOrigins"
+  },
+  body: {
+    username: "example@example.com",
+    password: "123456"
+  } 
+}=> 
+ApiGateway (Validate Login Token) =>
+UserService (Validade Login Credentials) => 
+AuthService (Generates Bearer Token) =>
+Browser (Store and Apply Bearer Token) =>
+
+
+```
+
 ### Ports:
 
 > _3000_: Store (Client)  
