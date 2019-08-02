@@ -1,6 +1,8 @@
 <h1 align="center">Welcome to <i>armarinho</i> 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/Micro Services-10-yellow.svg?cacheSeconds=2592000" />
+  
 </p>
 
 > Project to learn dev stuff and play with strange technologies
@@ -30,6 +32,10 @@ cd user-service
 
 pm2 start --name "Armarinho-User-Service" src/index.ts --watch
 ```
+
+## Microservices Authentication flow (Diagram):
+
+![image](https://user-images.githubusercontent.com/31391753/62387716-c7b40700-b531-11e9-8984-ef26583eadb7.png)
 
 ### Ports:
 

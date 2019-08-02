@@ -5,5 +5,6 @@
 - [ ] Enviar email (nodemailer, etc)
 - [ ] Logger
 - [ ] Desempenho (APM)
-- [ ] ESLint
+- [ ] ESLint + Prettier
+- [ ] Docker
 - [ ] Camada (service) de Validação (Token)
