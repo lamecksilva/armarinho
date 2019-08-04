@@ -46,15 +46,18 @@ Login =>
   body: {
     username: "example@example.com",
     password: "123456"
-  } 
-}=> 
-ApiGateway (Validate Login Token) =>
-UserService (Validade Login Credentials) => 
+  }
+} =>
+ApiGateway (Send request to AuthService) =>
+AuthService (Send Credentials to UserService)
+UserService (Validade Login Credentials) =>
 AuthService (Generates Bearer Token) =>
 Browser (Store and Apply Bearer Token) =>
-
-
 ```
+
+### Refresh Token:
+
+![image](https://user-images.githubusercontent.com/31391753/62416542-1be2e800-b613-11e9-93ba-6ca67471bc0d.png)
 
 ### Ports:
 

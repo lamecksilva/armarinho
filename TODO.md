@@ -8,3 +8,4 @@
 - [ ] ESLint + Prettier
 - [ ] Docker
 - [ ] Camada (service) de Validação (Token)
+- [ ] Scripts de Carga (Postman)
