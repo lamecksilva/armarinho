@@ -83,7 +83,7 @@ export const validateEditUserInput = (data: any) => {
 
 // ============================= Validate login user input =================================
 
-export const validateLoginUserInput = (data: any) => {
+export const validateLoginUserInput = (data: any): ValidationResponse => {
 	let errors: Array<ErrorType> = [];
 
 	if (isEmpty(data.email)) {

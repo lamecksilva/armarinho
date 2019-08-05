@@ -44,7 +44,7 @@ export default {
 	},
 
 	loginUser: async (_: any, props: any) => {
-		const { errors, token } = await generateJwtToken(props);
+		const { token, errors } = await generateJwtToken(props);
 
 		console.log(`TOKEN TOKEN TOKEN JWT TOKEN TOKEN ${token}`);
 
