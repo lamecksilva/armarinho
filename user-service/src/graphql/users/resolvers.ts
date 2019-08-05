@@ -13,6 +13,7 @@ export default {
 	createUser: async (_: any, props: any) => {
 		// Validate input data
 		const { isValid, errors } = await validateCreateUserInput(props);
+
 		// Send errors to GraphQl
 		if (!isValid)
 			return {
@@ -45,8 +46,6 @@ export default {
 
 	loginUser: async (_: any, props: any) => {
 		const { token, errors } = await generateJwtToken(props);
-
-		console.log(`TOKEN TOKEN TOKEN JWT TOKEN TOKEN ${token}`);
 
 		if (!isEmpty(errors))
 			return {

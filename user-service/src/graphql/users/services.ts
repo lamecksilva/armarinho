@@ -1,3 +1,5 @@
+import { hash } from 'bcrypt';
+
 import { CreateUserInput, EditUserInput } from './types';
 import { validateEditUserInput, validateLoginUserInput } from './validations';
 import User from './model';
@@ -25,6 +27,30 @@ export const getUsers = async (props: any) => {
 	} catch (e) {
 		console.error('Erro na função getUsers');
 		console.error(e);
+
+		throw new Error(e);
+	}
+};
+
+// ================================ Creates a new user ====================================
+export const saveUser = async (props: CreateUserInput) => {
+	try {
+		const { name, email, password } = props;
+
+		// Create a new User from Model
+		const newUser = await new User({
+			name,
+			email,
+			password: await hash(password, 10)
+		});
+
+		// Saving in the database
+		const result = await newUser.save();
+
+		// return created user
+		return { ...result._doc, password: null };
+	} catch (e) {
+		console.log('Erro na funçao saveUser');
 
 		throw new Error(e);
 	}
@@ -69,24 +95,6 @@ export const editUser = async ({ id, email, name }: EditUserInput) => {
 		console.log(e);
 
 		throw new Error(e);
-	}
-};
-
-// ================================ Creates a new user ====================================
-export const saveUser = async ({ name, email, password }: CreateUserInput) => {
-	try {
-		// let errors = []
-		// Create a new User from Model
-		const newUser = await new User({ name, email, password });
-
-		// Saving in the database
-		const result = await newUser.save();
-
-		// return created user
-		return { ...result._doc, password: null };
-	} catch (e) {
-		throw new Error(e);
-		console.log('Erro na funçao saveUser');
 	}
 };
 
