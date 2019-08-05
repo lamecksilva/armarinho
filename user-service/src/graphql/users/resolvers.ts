@@ -1,5 +1,12 @@
-import { getUsers, saveUser, removeUser, editUser, generateJwtToken } from './services';
+import {
+	getUsers,
+	saveUser,
+	removeUser,
+	editUser,
+	generateJwtToken
+} from './services';
 import { validateCreateUserInput } from './validations';
+import isEmpty from '../../utils/is-empty';
 
 export default {
 	// Create a user
@@ -36,23 +43,22 @@ export default {
 		};
 	},
 
-	loginUser: (_: any, props: any) => {
-		const { isValid, errors } = await validateLoginUserInput(props)
+	loginUser: async (_: any, props: any) => {
+		const { errors, token } = await generateJwtToken(props);
 
-		if (!isValid)
+		console.log(`TOKEN TOKEN TOKEN JWT TOKEN TOKEN ${token}`);
+
+		if (!isEmpty(errors))
 			return {
-				user: null,
+				token: null,
 				errors
 			};
 
-			let user = await generateJwtToken(props)
-
-
-			return {
-				user,
-				errors
-			};
-	}
+		return {
+			token,
+			errors
+		};
+	},
 
 	// Delete a user from database
 	deleteUser: (_: any, props: any) => removeUser(props)

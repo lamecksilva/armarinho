@@ -80,3 +80,26 @@ export const validateEditUserInput = (data: any) => {
 
 	return { isValid: isEmpty(errors), errors };
 };
+
+// ============================= Validate login user input =================================
+
+export const validateLoginUserInput = (data: any) => {
+	let errors: Array<ErrorType> = [];
+
+	if (isEmpty(data.email)) {
+		errors.push({ key: 'email', message: 'O campo email não pode ser vazio' });
+	}
+
+	if (isEmpty(data.password)) {
+		errors.push({
+			key: 'password',
+			message: 'O campo senha não pode ser vazio'
+		});
+	}
+
+	if (!isEmail(data.email)) {
+		errors.push({ key: 'email', message: 'Endereço de email inválido' });
+	}
+
+	return { isValid: isEmpty(errors), errors };
+};

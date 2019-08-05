@@ -89,6 +89,17 @@ export const CreateUserResult = new GraphQLObjectType({
 	}
 });
 
+export const LoginUserResult = new GraphQLObjectType({
+	name: 'LoginUserResult',
+	fields: {
+		token: { type: GraphQLString, description: 'JWT Token' },
+		errors: {
+			type: ErrorType,
+			description: 'Login Errors'
+		}
+	}
+});
+
 // EditUserResult type
 export const EditUserResult = new GraphQLObjectType({
 	name: 'EditUserResult',

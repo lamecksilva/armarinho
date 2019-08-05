@@ -1,7 +1,7 @@
-import jwt from "jsonwebtoken"
+import jwt from 'jsonwebtoken';
 
 import { CreateUserInput, EditUserInput } from './types';
-import { validateEditUserInput } from './validations';
+import { validateEditUserInput, validateLoginUserInput } from './validations';
 import User from './model';
 /**
  * These functions contain the business logic of the API
@@ -93,16 +93,38 @@ export const saveUser = async ({ name, email, password }: CreateUserInput) => {
 
 // ================================ Login user =================================
 export const generateJwtToken = async (props: any) => {
+	const { isValid, errors } = await validateLoginUserInput(props);
+
+	if (!isValid)
+		return {
+			token: null,
+			errors
+		};
+
 	try {
-		let user;
+		let user: any;
 
-		user = await User.findOne({email: props.email})
+		// Find for user by email
+		user = await User.findOne({ email: props.email });
 
-		if (!user) return null
+		console.log(user);
+		console.log(props);
 
-		jwt.verify
+		await jwt.sign({ ...user }, 'secret3', (err: any, token: string) => {
+			if (err) throw err;
+
+			console.log(token);
+
+			return { token, errors };
+		});
+
+		return { token: null, errors };
+	} catch (e) {
+		console.error(e);
+
+		throw new Error(e);
 	}
-}
+};
 
 // ================================ Delete user ================================
 export const removeUser = async (props: any) => {

@@ -1,6 +1,6 @@
 import { GraphQLID, GraphQLNonNull, GraphQLList, GraphQLString } from 'graphql';
 import resolvers from './resolvers';
-import { UserType } from './types';
+import { UserType, LoginUserResult } from './types';
 
 export default {
 	// Users query
@@ -21,7 +21,7 @@ export default {
 	},
 	// login = Generate jwt token of the user
 	login: {
-		type: new GraphQLNonNull(GraphQLString),
+		type: LoginUserResult,
 		description: 'JWT Token of the user',
 		args: {
 			email: {
