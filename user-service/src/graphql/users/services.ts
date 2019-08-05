@@ -1,9 +1,11 @@
-/**
- * These functions contain the business logic of the API
- */
+import jwt from "jsonwebtoken"
+
 import { CreateUserInput, EditUserInput } from './types';
 import { validateEditUserInput } from './validations';
 import User from './model';
+/**
+ * These functions contain the business logic of the API
+ */
 
 // ================================ Get all users from DB ===============================
 export const getUsers = async (props: any) => {
@@ -14,12 +16,18 @@ export const getUsers = async (props: any) => {
 			? (users = await User.find({ _id: props.id }))
 			: (users = await User.find({}));
 
-		return users.map(u => {
+		props.email !== undefined
+			? (users = await User.find({ email: props.email }))
+			: (users = await User.find({}));
+
+		return users.map((u: any) => {
 			return { ...u._doc, password: null };
 		});
 	} catch (e) {
-		throw new Error(e);
 		console.error('Erro na função getUsers');
+		console.error(e);
+
+		throw new Error(e);
 	}
 };
 
@@ -82,6 +90,19 @@ export const saveUser = async ({ name, email, password }: CreateUserInput) => {
 		console.log('Erro na funçao saveUser');
 	}
 };
+
+// ================================ Login user =================================
+export const generateJwtToken = async (props: any) => {
+	try {
+		let user;
+
+		user = await User.findOne({email: props.email})
+
+		if (!user) return null
+
+		jwt.verify
+	}
+}
 
 // ================================ Delete user ================================
 export const removeUser = async (props: any) => {

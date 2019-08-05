@@ -1,5 +1,6 @@
 import express, { Response, Request } from 'express';
 import jwt from 'jsonwebtoken';
+import { request } from 'graphql-request';
 
 const app = express();
 
@@ -7,55 +8,69 @@ app.use(express.json());
 
 app.get('/', (_, res: Response) => res.send('Hello from AUTH-service'));
 
-const fakeUser = {
-	_id: '5d33252b33afcf536e756dc5',
-	name: 'Lameco',
-	email: 'lameck.santos@lsdev.com',
-	// password: '12iyu3gf12yiu3f123iy12rf3iy1u23f12yi3f12iy3r12yil12i12yuf312yi',
-	createdAt: '2019-07-20T14:28:59.807Z',
-	updatedAt: '2019-07-20T14:28:59.807Z'
-};
+// const fakeUser = {
+// 	_id: '5d33252b33afcf536e756dc5',
+// 	name: 'Lameco',
+// 	email: 'lameck.santos@lsdev.com',
+// 	// password: '12iyu3gf12yiu3f123iy12rf3iy1u23f12yi3f12iy3r12yil12i12yuf312yi',
+// 	createdAt: '2019-07-20T14:28:59.807Z',
+// 	updatedAt: '2019-07-20T14:28:59.807Z'
+// };
 
 // Login route
 app.post('/auth/login', async (req: Request, res: Response) => {
 	console.log(req.body);
 
-	const tokenType = 'Bearer';
-	const expiresIn = '7h';
-
-	await jwt.sign(
-		fakeUser,
-		'secret',
-		{ expiresIn: '3h' },
-		async (error, token) => {
-			if (error) {
-				res.status(400).json({
-					success: false,
-					error: { message: 'Erro na criação do Token' }
-				});
+	const query = `{
+			users {
+				_id
+				email
+				name
+				createdAt
+				updatedAt
 			}
+	}`;
 
-			await jwt.sign(
-				{ userId: fakeUser._id, userName: fakeUser.name },
-				'secret2',
-				{ expiresIn },
-				(err, refreshToken) => {
-					if (err) {
-						res.status(400).json({
-							success: false,
-							error: { message: 'Erro na criação do Refresh Token' }
-						});
-					}
+	await request('http://localhost:9002/graphql', query)
+		.then(data => res.status(200).json(data.users))
+		.catch(err => res.status(400).json(err));
 
-					console.dir({ tokenType, token, expiresIn, refreshToken });
+	// const tokenType = 'Bearer';
+	// const expiresIn = '7h';
 
-					return res
-						.status(200)
-						.json({ tokenType, token, expiresIn, refreshToken });
-				}
-			);
-		}
-	);
+	// await jwt.sign(
+	// 	fakeUser,
+	// 	'secret',
+	// 	{ expiresIn: '3h' },
+	// 	async (error, token) => {
+	// 		if (error) {
+	// 			res.status(400).json({
+	// 				success: false,
+	// 				error: { message: 'Erro na criação do Token' }
+	// 			});
+	// 		}
+
+	// 		await jwt.sign(
+	// 			{ userId: fakeUser._id, userName: fakeUser.name },
+	// 			'secret2',
+	// 			{ expiresIn },
+	// 			(err, refreshToken) => {
+	// 				if (err) {
+	// 					res.status(400).json({
+	// 						success: false,
+	// 						error: { message: 'Erro na criação do Refresh Token' }
+	// 					});
+	// 				}
+
+	// 				console.dir({ tokenType, token, expiresIn, refreshToken });
+
+	// 				return res
+	// 					.status(200)
+	// 					.json({ tokenType, token, expiresIn, refreshToken });
+	// 			}
+	// 		);
+	// 	}
+	// );
 });
 
 // Route to test Authorization http header

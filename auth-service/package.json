@@ -8,6 +8,7 @@
   "private": false,
   "dependencies": {
     "express": "^4.17.1",
+    "graphql-request": "^1.8.2",
     "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {

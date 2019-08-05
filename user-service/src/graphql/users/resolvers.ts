@@ -1,4 +1,4 @@
-import { getUsers, saveUser, removeUser, editUser } from './services';
+import { getUsers, saveUser, removeUser, editUser, generateJwtToken } from './services';
 import { validateCreateUserInput } from './validations';
 
 export default {
@@ -35,6 +35,24 @@ export default {
 			errors
 		};
 	},
+
+	loginUser: (_: any, props: any) => {
+		const { isValid, errors } = await validateLoginUserInput(props)
+
+		if (!isValid)
+			return {
+				user: null,
+				errors
+			};
+
+			let user = await generateJwtToken(props)
+
+
+			return {
+				user,
+				errors
+			};
+	}
 
 	// Delete a user from database
 	deleteUser: (_: any, props: any) => removeUser(props)
