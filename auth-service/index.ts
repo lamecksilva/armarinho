@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken';
 
 const app = express();
 
+app.use(express.json());
+
 app.get('/', (_, res: Response) => res.send('Hello from AUTH-service'));
 
 const fakeUser = {
@@ -14,52 +16,61 @@ const fakeUser = {
 	updatedAt: '2019-07-20T14:28:59.807Z'
 };
 
+// Login route
 app.post('/auth/login', async (req: Request, res: Response) => {
 	console.log(req.body);
 
-	try {
-		const tokenType = 'Bearer';
-		const expiresIn = '7h';
-		const token = await jwt.sign(fakeUser, 'secret', { expiresIn: '3h' });
+	const tokenType = 'Bearer';
+	const expiresIn = '7h';
 
-		const refreshToken = await jwt.sign(
-			{ userId: fakeUser._id, userName: fakeUser.name },
-			'secret2',
-			{ expiresIn }
-		);
+	await jwt.sign(
+		fakeUser,
+		'secret',
+		{ expiresIn: '3h' },
+		async (error, token) => {
+			if (error) {
+				res.status(400).json({
+					success: false,
+					error: { message: 'Erro na criação do Token' }
+				});
+			}
 
-		console.log(
-			`{ tokenType: ${tokenType}, token: ${token}, expiresIn: ${expiresIn}, refreshToken: ${refreshToken} }`
-		);
+			await jwt.sign(
+				{ userId: fakeUser._id, userName: fakeUser.name },
+				'secret2',
+				{ expiresIn },
+				(err, refreshToken) => {
+					if (err) {
+						res.status(400).json({
+							success: false,
+							error: { message: 'Erro na criação do Refresh Token' }
+						});
+					}
 
-		return res.status(200).json({ tokenType, token, expiresIn, refreshToken });
-	} catch (e) {
-		console.log(e);
+					console.dir({ tokenType, token, expiresIn, refreshToken });
 
-		throw new Error(e);
-	}
+					return res
+						.status(200)
+						.json({ tokenType, token, expiresIn, refreshToken });
+				}
+			);
+		}
+	);
 });
 
+// Route to test Authorization http header
 app.get('/protected', async (req: Request, res: Response) => {
 	const token: string = req.headers.authorization || 'noToken';
 
-	try {
-		await jwt.verify(token, 'secret', (err, data) => {
-			if (err) {
-				return res.status(400).json({ success: false, err });
+	await jwt.verify(token, 'secret', (error, data) => {
+		if (error) {
+			return res
+				.status(401)
+				.json({ success: false, error: { message: 'JWT Token inválido' } });
+		}
 
-				throw err;
-			}
-
-			return res.status(200).json(data);
-		});
-
-		return res.json(200).json({ success: false });
-	} catch (e) {
-		console.log(e);
-
-		throw new Error(e);
-	}
+		return res.status(200).json({ success: true, data });
+	});
 });
 
 const PORT = process.env.PORT || 9001;

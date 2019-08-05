@@ -345,6 +345,14 @@
   resolved "https://registry.yarnpkg.com/@types/cookiejar/-/cookiejar-2.1.1.tgz#90b68446364baf9efd8e8349bb36bd3852b75b80"
   integrity sha512-aRnpPa7ysx3aNW60hTiCtLHlQaIFsXFCgQlpakNgDNVFzbtusSY8PwjAQgRWfSk0ekNoBjO51eQRB6upA9uuyw==
 
+"@types/express-graphql@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@types/express-graphql/-/express-graphql-0.8.0.tgz#2c32c72190ad303c991dc4f04488250001a31af1"
+  integrity sha512-Gzhx6v15CRLnWbD7C9nmQTPd+QXRuJhOovQVyQjw15e2LjmVYI06BhUdAlGtf7sg/BMIeVW6M8RtNww+8HowuA==
+  dependencies:
+    "@types/express" "*"
+    "@types/graphql" "*"
+
 "@types/express-serve-static-core@*":
   version "4.16.7"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.16.7.tgz#50ba6f8a691c08a3dd9fa7fba25ef3133d298049"
@@ -3020,10 +3028,10 @@ mongoose-legacy-pluralize@1.0.2:
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
-mongoose@^5.6.4:
-  version "5.6.6"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.6.6.tgz#78953b9ea91b1bf685ce59d7737100352af627f6"
-  integrity sha512-5uecJSyl2TwbGM9vJteP4C54zsQL6qllq1qe/JPGO3oqIWcK/PnzCL91E0gfPH5VVpvWGX+6PafNYmU3NK8S7w==
+mongoose@^5.6.8:
+  version "5.6.8"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.6.8.tgz#9b6d2575c21402def45f50072a3900c54b697cc8"
+  integrity sha512-BhgGU/KvnVX8WbamcWgtG/45rp+xZnaF9MhNbzESIIYxK7g5QurXYcaGGCm/JFiIdIxkVUgBycWG7UzRUEzvDg==
   dependencies:
     async "2.6.2"
     bson "~1.1.1"

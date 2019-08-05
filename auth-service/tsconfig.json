@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		/* Basic Options */
+		"target": "es6",
+		"module": "commonjs",
+		"strict": true,
+		"esModuleInterop": true,
+		"lib": ["dom", "esnext"],
+		"outDir": "./dist",
+
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true
+	},
+	"exclude": ["node_modules"]
+}
