@@ -2,20 +2,13 @@ import express, { Response, Request } from 'express';
 import jwt from 'jsonwebtoken';
 import { request } from 'graphql-request';
 
+import jwtSign from './src/utils/jwt-sign';
+
 const app = express();
 
 app.use(express.json());
 
 app.get('/', (_, res: Response) => res.send('Hello from AUTH-service'));
-
-// const fakeUser = {
-// 	_id: '5d33252b33afcf536e756dc5',
-// 	name: 'Lameco',
-// 	email: 'lameck.santos@lsdev.com',
-// 	// password: '12iyu3gf12yiu3f123iy12rf3iy1u23f12yi3f12iy3r12yil12i12yuf312yi',
-// 	createdAt: '2019-07-20T14:28:59.807Z',
-// 	updatedAt: '2019-07-20T14:28:59.807Z'
-// };
 
 // Login route
 app.post('/auth/login', async (req: Request, res: Response) => {
@@ -31,12 +24,24 @@ app.post('/auth/login', async (req: Request, res: Response) => {
 			}
 		}`;
 
+	let token;
+
 	await request('http://localhost:9002/graphql', query, req.body)
-		.then(data => res.status(200).json(data.login))
+		.then(data => (token = data.login.token))
 		.catch(err => res.status(400).json(err));
 
-	// const tokenType = 'Bearer';
-	// const expiresIn = '7h';
+	const tokenType = 'Bearer';
+	const refreshExpiresIn = '7h';
+	const expiresIn = '1h';
+
+	const refreshToken = await jwtSign(
+		{ provisoryItem: 'Provisory Value', provisoryItem2: 'Provisory Value 2' },
+		'secret'
+	);
+
+	return res
+		.status(200)
+		.json({ tokenType, token, expiresIn, refreshToken, refreshExpiresIn });
 
 	// await jwt.sign(
 	// 	fakeUser,
