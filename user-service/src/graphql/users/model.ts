@@ -22,10 +22,10 @@ const UserSchema: Schema = new Schema(
 );
 
 interface User extends Document {
-	name: String;
-	email: String;
-	password: String;
-	_doc?: Object;
+	name: string;
+	email: string;
+	password: string;
+	_doc?: object;
 }
 
 export default mongoose.model<User>('User', UserSchema);

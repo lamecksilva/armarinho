@@ -1,4 +1,4 @@
-import { hash } from 'bcrypt';
+import { hash, compare } from 'bcrypt';
 
 import { CreateUserInput, EditUserInput } from './types';
 import { validateEditUserInput, validateLoginUserInput } from './validations';
@@ -100,8 +100,10 @@ export const editUser = async ({ id, email, name }: EditUserInput) => {
 
 // ================================ Login user =================================
 export const generateJwtToken = async (props: any) => {
+	// Validate user input
 	const { isValid, errors } = await validateLoginUserInput(props);
 
+	// If not is valid, return errors
 	if (!isValid)
 		return {
 			token: null,
@@ -111,8 +113,33 @@ export const generateJwtToken = async (props: any) => {
 	// Find user by email
 	let user = await User.findOne({ email: props.email });
 
+	// If user not exists in db, returns error
+	if (!user) {
+		errors.push({ key: 'email', message: 'Nenhum usuário encontrado' });
+
+		return {
+			token: null,
+			errors
+		};
+	}
+
+	// Verify password
+	const isMatch = await compare(props.password, user.password);
+
+	// If password is incorrect, returns error
+	if (!isMatch) {
+		console.log('Senha incorreta ladrão');
+
+		errors.push({ key: 'password', message: 'Senha incorreta' });
+
+		return {
+			token: null,
+			errors
+		};
+	}
+
 	// Generate token
-	let token = await jwtSign({ ...user }, 'secret');
+	let token = await jwtSign({ ...user._doc, password: null }, 'secret');
 
 	return { token, errors };
 };
