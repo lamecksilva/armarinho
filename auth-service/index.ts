@@ -24,12 +24,15 @@ app.post('/auth/login', async (req: Request, res: Response) => {
 			}
 		}`;
 
-	let token;
+	const data = await request('http://localhost:9002/graphql', query, req.body);
 
-	await request('http://localhost:9002/graphql', query, req.body)
-		.then(data => (token = data.login.token))
-		.catch(err => res.status(400).json(err));
+	console.log(data);
 
+	if (data.login.errors.length !== 0) {
+		return res.status(400).json({ errors: data.login.errors });
+	}
+
+	const { token } = data.login;
 	const tokenType = 'Bearer';
 	const refreshExpiresIn = '7h';
 	const expiresIn = '1h';
