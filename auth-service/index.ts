@@ -1,10 +1,11 @@
 require('dotenv').config();
 
 import express, { Response, Request } from 'express';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 import { request } from 'graphql-request';
 
 import jwtSign from './src/utils/jwt-sign';
+import jwtVerify from './src/utils/jwt-verify';
 
 const app = express();
 
@@ -33,8 +34,10 @@ app.post('/auth/login', async (req: Request, res: Response) => {
 		req.body
 	);
 
-	if (data.login.errors) {
-		return res.status(400).json({ errors: data.login.errors });
+	let { errors } = data.login;
+
+	if (errors.length) {
+		return res.status(400).json({ errors });
 	}
 
 	const { token } = data.login;
@@ -56,15 +59,22 @@ app.post('/auth/login', async (req: Request, res: Response) => {
 app.get('/protected', async (req: Request, res: Response) => {
 	const token: string = req.headers.authorization || 'noToken';
 
-	await jwt.verify(token, 'secret', (error, data) => {
-		if (error) {
+	// Verify jwt token
+	await jwtVerify(token, 'secret')
+		.then(isValid => {
+			console.log(isValid);
+
+			return res.status(200).json({ success: true, message: 'JWT Válido' });
+		})
+		.catch(err => {
+			console.error(err);
+
 			return res
 				.status(401)
 				.json({ success: false, error: { message: 'JWT Token inválido' } });
-		}
+		});
 
-		return res.status(200).json({ success: true, data });
-	});
+	return res.status(102).json({ success: true });
 });
 
 const PORT = process.env.PORT || 9001;
