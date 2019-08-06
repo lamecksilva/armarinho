@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 import express, { Response, Request } from 'express';
 import jwt from 'jsonwebtoken';
 import { request } from 'graphql-request';
@@ -8,12 +10,12 @@ const app = express();
 
 app.use(express.json());
 
+// Test Route
 app.get('/', (_, res: Response) => res.send('Hello from AUTH-service'));
 
 // Login route
 app.post('/auth/login', async (req: Request, res: Response) => {
-	console.log(req.body);
-
+	// GraphQL Query
 	const query = `query ($email: String!, $password: String!) {
 			login(email: $email, password: $password) {
 				token,
@@ -24,11 +26,14 @@ app.post('/auth/login', async (req: Request, res: Response) => {
 			}
 		}`;
 
-	const data = await request('http://localhost:9002/graphql', query, req.body);
+	// GraphQL request to User Service
+	const data = await request(
+		process.env.USER_SERVICE_URL || 'http://localhost:9002/graphql',
+		query,
+		req.body
+	);
 
-	console.log(data);
-
-	if (data.login.errors.length !== 0) {
+	if (data.login.errors) {
 		return res.status(400).json({ errors: data.login.errors });
 	}
 
@@ -45,40 +50,6 @@ app.post('/auth/login', async (req: Request, res: Response) => {
 	return res
 		.status(200)
 		.json({ tokenType, token, expiresIn, refreshToken, refreshExpiresIn });
-
-	// await jwt.sign(
-	// 	fakeUser,
-	// 	'secret',
-	// 	{ expiresIn: '3h' },
-	// 	async (error, token) => {
-	// 		if (error) {
-	// 			res.status(400).json({
-	// 				success: false,
-	// 				error: { message: 'Erro na criação do Token' }
-	// 			});
-	// 		}
-
-	// 		await jwt.sign(
-	// 			{ userId: fakeUser._id, userName: fakeUser.name },
-	// 			'secret2',
-	// 			{ expiresIn },
-	// 			(err, refreshToken) => {
-	// 				if (err) {
-	// 					res.status(400).json({
-	// 						success: false,
-	// 						error: { message: 'Erro na criação do Refresh Token' }
-	// 					});
-	// 				}
-
-	// 				console.dir({ tokenType, token, expiresIn, refreshToken });
-
-	// 				return res
-	// 					.status(200)
-	// 					.json({ tokenType, token, expiresIn, refreshToken });
-	// 			}
-	// 		);
-	// 	}
-	// );
 });
 
 // Route to test Authorization http header
