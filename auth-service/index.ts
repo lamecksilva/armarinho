@@ -21,18 +21,18 @@ app.get('/', (_, res: Response) => res.send('Hello from AUTH-service'));
 app.post('/auth/login', async (req: Request, res: Response) => {
 	console.log(req.body);
 
-	const query = `{
-			users {
-				_id
-				email
-				name
-				createdAt
-				updatedAt
+	const query = `query ($email: String!, $password: String!) {
+			login(email: $email, password: $password) {
+				token,
+				errors {
+					key
+					message
+				}
 			}
-	}`;
+		}`;
 
-	await request('http://localhost:9002/graphql', query)
-		.then(data => res.status(200).json(data.users))
+	await request('http://localhost:9002/graphql', query, req.body)
+		.then(data => res.status(200).json(data.login))
 		.catch(err => res.status(400).json(err));
 
 	// const tokenType = 'Bearer';

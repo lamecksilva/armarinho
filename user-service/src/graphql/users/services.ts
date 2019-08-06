@@ -80,7 +80,7 @@ export const editUser = async ({ id, email, name }: EditUserInput) => {
 };
 
 // ================================ Login user =================================
-export const generateJwtToken = async (props: any) => {
+export const loginGenerateJWT = async (props: any) => {
 	// Validate user input
 	const { isValid, errors } = await validateLoginUserInput(props);
 
@@ -109,8 +109,6 @@ export const generateJwtToken = async (props: any) => {
 
 	// If password is incorrect, returns error
 	if (!isMatch) {
-		console.log('Senha incorreta ladrão');
-
 		errors.push({ key: 'password', message: 'Senha incorreta' });
 
 		return {
@@ -120,7 +118,9 @@ export const generateJwtToken = async (props: any) => {
 	}
 
 	// Generate token
-	let token = await jwtSign({ ...user._doc, password: null }, 'secret');
+	let token = await jwtSign({ name: user.name, email: user.email }, 'secret', {
+		expiresIn: '1h'
+	});
 
 	return { token, errors };
 };

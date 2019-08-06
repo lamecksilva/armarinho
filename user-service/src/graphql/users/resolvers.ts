@@ -3,7 +3,7 @@ import {
 	saveUser,
 	removeUser,
 	editUser,
-	generateJwtToken
+	loginGenerateJWT
 } from './services';
 import { validateCreateUserInput } from './validations';
 import isEmpty from '../../utils/is-empty';
@@ -45,7 +45,7 @@ export default {
 	},
 
 	loginUser: async (_: any, props: any) => {
-		const { token, errors } = await generateJwtToken(props);
+		const { token, errors } = await loginGenerateJWT(props);
 
 		if (!isEmpty(errors))
 			return {
