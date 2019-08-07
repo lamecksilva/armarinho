@@ -3,13 +3,20 @@ import express, { Response, Request, NextFunction } from 'express';
 import httpProxy from 'express-http-proxy';
 import helmet from 'helmet';
 import morgan from 'morgan';
-
 import isReachable from 'is-reachable';
+
+// Module with services urls
+import urls from './utils/urls';
 
 const app = express();
 
-const authServiceProxy = httpProxy('http://localhost:9001');
-const userServiceProxy = httpProxy('http://localhost:9002');
+app.use(morgan('dev'));
+app.use(helmet());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+const authServiceProxy = httpProxy(urls.authService);
+const userServiceProxy = httpProxy(urls.userService);
 
 app.get('/', (_, res: Response) => res.send('Hello from API-Gateway'));
 
@@ -21,48 +28,36 @@ app.use('/users', (req: Request, res: Response, next: NextFunction) => {
 	userServiceProxy(req, res, next);
 });
 
-app.use(morgan('dev'));
-app.use(helmet());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
 // HealthCheck
 app.get('/status', async (_, res: Response) => {
-	const authService = 'http://localhost:9001';
-	const userService = 'http://localhost:9002';
-	const productService = 'http://localhost:9003';
-	const orderService = 'http://localhost:9004';
-	const filesService = 'http://localhost:9005';
-	const notificationService = 'http://localhost:9006';
-	const paymentService = 'http://localhost:9007';
-
 	res.json({
-		authService: (await isReachable(authService, { timeout: 300 }))
+		authService: (await isReachable(urls.authService, { timeout: 300 }))
 			? 'Online'
 			: 'Offline',
-		userService: (await isReachable(userService, { timeout: 300 }))
+		userService: (await isReachable(urls.userService, { timeout: 300 }))
 			? 'Online'
 			: 'Offline',
-		productService: (await isReachable(productService, { timeout: 300 }))
+		productService: (await isReachable(urls.productService, { timeout: 300 }))
 			? 'Online'
 			: 'Offline',
-		orderService: (await isReachable(orderService, { timeout: 300 }))
+		orderService: (await isReachable(urls.orderService, { timeout: 300 }))
 			? 'Online'
 			: 'Offline',
-		filesService: (await isReachable(filesService, { timeout: 300 }))
+		filesService: (await isReachable(urls.filesService, { timeout: 300 }))
 			? 'Online'
 			: 'Offline',
-		notificationService: (await isReachable(notificationService, {
+		notificationService: (await isReachable(urls.notificationService, {
 			timeout: 300
 		}))
 			? 'Online'
 			: 'Offline',
-		paymentService: (await isReachable(paymentService, { timeout: 300 }))
+		paymentService: (await isReachable(urls.paymentService, { timeout: 300 }))
 			? 'Online'
 			: 'Offline'
 	});
 });
 
+// Create http server
 const server = http.createServer(app);
 
 const PORT = process.env.PORT || 9000;

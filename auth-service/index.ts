@@ -1,11 +1,11 @@
 require('dotenv').config();
 
 import express, { Response, Request } from 'express';
-// import jwt from 'jsonwebtoken';
 import { request } from 'graphql-request';
 
 import jwtSign from './src/utils/jwt-sign';
 import jwtVerify from './src/utils/jwt-verify';
+import jwtDecode from './src/utils/jwt-decode';
 
 const app = express();
 
@@ -96,11 +96,17 @@ app.post('/refresh-token', async (req: Request, res: Response) => {
 	// 2 -> Generate an new AcessToken
 	// 3 -> Generate an new RefreshToken
 	// 4 -> Return new tokens
-	console.log(req.body);
+	await console.log(req.body);
 
-	return res.status(200);
+	const decoded = await jwtDecode(req.body.token);
+
+	const encoded = await jwtSign(decoded, 'secret');
+
+	return res.status(200).json({ decoded, body: req.body, newToken: encoded });
 });
 
 const PORT = process.env.PORT || 9001;
 
-app.listen(PORT, () => console.log(`Auth-Service running on port: ${PORT}`));
+app.listen(PORT, () =>
+	console.log(`Auth-Service running on http://localhost:${PORT}`)
+);
