@@ -60,7 +60,7 @@ export const validateCreateUserInput = (data: any): ValidationResponse => {
 };
 
 // ============================= Validate edit user input =================================
-export const validateEditUserInput = (data: any) => {
+export const validateEditUserInput = (data: any): ValidationResponse => {
 	let errors: Array<ErrorType> = [];
 
 	if (!isEmpty(data.name)) {

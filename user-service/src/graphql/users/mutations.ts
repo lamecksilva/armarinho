@@ -1,6 +1,7 @@
 import { GraphQLID, GraphQLNonNull, GraphQLString } from 'graphql';
-import resolvers from './resolvers';
+
 import { UserType, CreateUserResult, EditUserResult } from './types';
+import resolvers from './resolvers';
 
 export default {
 	// Crate and save a new user

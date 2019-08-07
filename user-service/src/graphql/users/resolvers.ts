@@ -44,7 +44,7 @@ export default {
 		};
 	},
 
-	loginUser: async (_: any, props: any) => {
+	loginUser: async (_: any, props: any)  => {
 		const { token, errors } = await loginGenerateJWT(props);
 
 		if (!isEmpty(errors))
@@ -62,3 +62,4 @@ export default {
 	// Delete a user from database
 	deleteUser: (_: any, props: any) => removeUser(props)
 };
+

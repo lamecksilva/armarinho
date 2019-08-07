@@ -1,6 +1,7 @@
 import { GraphQLID, GraphQLNonNull, GraphQLList, GraphQLString } from 'graphql';
-import resolvers from './resolvers';
+
 import { UserType, LoginUserResult } from './types';
+import resolvers from './resolvers';
 
 export default {
 	// Users query

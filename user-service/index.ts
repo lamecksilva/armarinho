@@ -34,10 +34,9 @@ app.use(
 // PORT of express app
 const PORT = process.env.PORT || 9002;
 
-app.listen(PORT, () => {
-	console.log(`User service com sucesso em: http://localhost:${PORT}`);
-	console.log(`Graphql rodando em: http:localhost:${PORT}/graphql`);
-});
+app.listen(PORT, () =>
+	console.log(`User Service running on: http://localhost:${PORT}`)
+);
 
 // Exporting server (this is for tests)
 export default app;
