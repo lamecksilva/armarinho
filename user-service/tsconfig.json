@@ -7,6 +7,8 @@
 		"esModuleInterop": true,
 		"lib": ["dom", "esnext"],
 		"outDir": "./dist",
+		"alwaysStrict": true,
+		"pretty": true,
 
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
