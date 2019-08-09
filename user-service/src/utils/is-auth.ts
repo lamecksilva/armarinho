@@ -8,6 +8,7 @@ export default (req: Request, res: Response, next: NextFunction) => {
 		res
 			.status(401)
 			.json({ success: false, message: 'Authorization header não encontrado' });
+		req.isAuth = false;
 		return next();
 	}
 
@@ -17,25 +18,32 @@ export default (req: Request, res: Response, next: NextFunction) => {
 		res
 			.status(401)
 			.json({ success: false, message: 'Token inexistente no header' });
+
+		req.isAuth = false;
 		return next();
 	}
 
 	let decoded;
 	try {
-		decoded = jwt.verify(token, 'secret');
+		decoded = jwt.verify(token, process.env.SECRET_OR_KEY || 'secret');
 	} catch (err) {
 		res
 			.status(401)
 			.json({ success: false, message: 'Erro na verificação do token' });
 
+		req.isAuth = false;
 		return next();
 	}
 
 	if (!decoded) {
-		res.status(401).json({ success: false, message: 'Sem dados no jwt token' });
+		res
+			.status(401)
+			.json({ success: false, message: 'Dados não encontrados no JWT Token' });
 
+		req.isAuth = false;
 		return next();
 	}
 
+	req.isAuth = true;
 	next();
 };
