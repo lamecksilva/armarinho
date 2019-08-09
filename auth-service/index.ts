@@ -12,16 +12,12 @@ const app = express();
 app.use(express.json());
 
 /**
- *
  * Test Route
- *
  */
 app.get('/', (_, res: Response) => res.send('Hello from AUTH-service'));
 
 /**
- *
  *  Login route
- *
  */
 app.post('/login', async (req: Request, res: Response) => {
 	// GraphQL Query
@@ -56,9 +52,9 @@ app.post('/login', async (req: Request, res: Response) => {
 	return res.status(200).json({
 		tokenType: 'Bearer',
 		token,
-		expiresIn: '1h',
+		expiresIn: '1h'
 		// refreshToken,
-		refreshExpiresIn: '7h'
+		// refreshExpiresIn: '7h'
 	});
 });
 
