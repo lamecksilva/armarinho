@@ -1,5 +1,5 @@
 # "Declarando" a imagem a ser "copiada" para o container
-FROM node:11-alpine
+FROM node:alpine
 
 # Installing bcrypt dependencies
 RUN apk --no-cache add --virtual builds-deps build-base python
