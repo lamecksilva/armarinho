@@ -1,10 +1,22 @@
 import { hash } from 'bcrypt';
 
 import User from './model';
-import { SaveUserType } from './types';
+import { SaveUserType, ErrorObject } from './types';
 
 export const saveUser = async (data: SaveUserType) => {
 	const { name, email, password } = data;
+	let error: ErrorObject = {}
+	
+	const user = await User.findOne(email, {password: 0})
+
+	if (user){
+		error.email = "Email já cadastrado"
+
+		return {
+			savedUser: null,
+			error
+		}
+	}
 
 	const newUser = new User({
 		name,
@@ -16,5 +28,5 @@ export const saveUser = async (data: SaveUserType) => {
 
 	delete userSaved.password;
 
-	return { ...userSaved._doc };
+	return { savedUser: userSaved._doc, error };
 };

@@ -28,7 +28,7 @@ export default (): void => {
 
 	db.on('disconnected', () => {
 		console.error('MongoDB desconectado');
-		mongoose.connect(MONGO_URL, { server: { auto_reconnect: true } });
+		mongoose.connect(MONGO_URL);
 	});
 
 	db.on('reconnected', () => {

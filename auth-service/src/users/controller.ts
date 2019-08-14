@@ -5,7 +5,7 @@ import { saveUser } from './repository';
 
 // Register user
 export const registerUser = async (req: Request, res: Response) => {
-	const { isValid, errors } = await validateCreateUserInput(req.body);
+	let { isValid, errors } = await validateCreateUserInput(req.body);
 
 	if (!isValid) {
 		return res
@@ -14,7 +14,14 @@ export const registerUser = async (req: Request, res: Response) => {
 			.end();
 	}
 
-	const savedUser = await saveUser(req.body);
+	const { savedUser, error } = await saveUser(req.body);
+
+	if (error) {
+		return res
+			.status(400)
+			.json({ success: false, errors: error })
+			.end();
+	}
 
 	return res
 		.status(201)

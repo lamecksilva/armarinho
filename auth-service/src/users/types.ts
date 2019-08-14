@@ -1,11 +1,10 @@
-export interface ErrorType {
-	key: string;
-	message: string;
+export interface ErrorObject {
+	[key: string]: string;
 }
 
 export interface ValidationResponse {
 	isValid: boolean;
-	errors: Array<ErrorType>;
+	errors: ErrorObject;
 }
 
 export interface SaveUserType {

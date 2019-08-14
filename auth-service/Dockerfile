@@ -2,7 +2,7 @@ FROM node:alpine
 
 WORKDIR /app
 
-MAINTAINER Lameck lameck2@hotmail.com
+LABEL Lameck lameck2@hotmail.com
 
 COPY package.json .
 
