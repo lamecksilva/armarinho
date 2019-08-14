@@ -1,16 +1,16 @@
 require('dotenv').config();
 
 import express, { Response, Request } from 'express';
-import { request } from 'graphql-request';
+// import { request } from 'graphql-request';
 
 // import jwtSign from './src/utils/jwt-sign';
+import App from './src';
 import jwtVerify from './src/utils/jwt-verify';
 // import jwtDecode from './src/utils/jwt-decode';
 
 const app = express();
 
-app.use(express.json());
-
+App(app);
 /**
  * Test Route
  */
@@ -19,44 +19,44 @@ app.get('/', (_, res: Response) => res.send('Hello from AUTH-service'));
 /**
  *  Login route
  */
-app.post('/login', async (req: Request, res: Response) => {
-	// GraphQL Query
-	const query = `query ($email: String!, $password: String!) {
-			login(email: $email, password: $password) {
-				token,
-				errors {
-					key
-					message
-				}
-			}
-		}`;
+// app.post('/login', async (req: Request, res: Response) => {
+// 	// GraphQL Query
+// 	const query = `query ($email: String!, $password: String!) {
+// 			login(email: $email, password: $password) {
+// 				token,
+// 				errors {
+// 					key
+// 					message
+// 				}
+// 			}
+// 		}`;
 
-	// GraphQL request to User Service
-	const data = await request(
-		process.env.USER_SERVICE_URL || 'http://localhost:9002/graphql',
-		query,
-		req.body
-	);
+// 	// GraphQL request to User Service
+// 	const data = await request(
+// 		process.env.USER_SERVICE_URL || 'http://localhost:9002/graphql',
+// 		query,
+// 		req.body
+// 	);
 
-	let { errors, token } = data.login;
+// 	let { errors, token } = data.login;
 
-	if (errors.length) {
-		return res.status(400).json({ errors });
-	}
+// 	if (errors.length) {
+// 		return res.status(400).json({ errors });
+// 	}
 
-	// const refreshToken = await jwtSign(
-	// 	{ provisoryItem: 'Provisory Value', provisoryItem2: 'Provisory Value 2' },
-	// 	'secret'
-	// );
+// 	// const refreshToken = await jwtSign(
+// 	// 	{ provisoryItem: 'Provisory Value', provisoryItem2: 'Provisory Value 2' },
+// 	// 	'secret'
+// 	// );
 
-	return res.status(200).json({
-		tokenType: 'Bearer',
-		token,
-		expiresIn: '1h'
-		// refreshToken,
-		// refreshExpiresIn: '7h'
-	});
-});
+// 	return res.status(200).json({
+// 		tokenType: 'Bearer',
+// 		token,
+// 		expiresIn: '1h'
+// 		// refreshToken,
+// 		// refreshExpiresIn: '7h'
+// 	});
+// });
 
 /**
  *
