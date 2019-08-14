@@ -1,8 +1,11 @@
 import express, { Response } from 'express';
 
+import App from "./src"
+
 const app = express();
 
-app.use(express.json());
+// Apply configuration, routes, middlewares etc
+App(app)
 
 app.get('/', (_, res: Response) =>
 	res
