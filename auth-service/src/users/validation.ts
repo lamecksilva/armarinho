@@ -3,6 +3,12 @@ import { isEmail, isLength, equals as isEquals } from 'validator';
 import isEmpty from '../utils/is-empty';
 import { ErrorObject, ValidationResponse } from './types';
 
+/**
+ * validateCreateUserInput
+ *
+ * Function to validade create user input
+ * @param data			Object with user new data
+ */
 export const validateCreateUserInput = (data: any): ValidationResponse => {
 	let errors: ErrorObject = {};
 

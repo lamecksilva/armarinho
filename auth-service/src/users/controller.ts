@@ -3,8 +3,16 @@ import { Request, Response } from 'express';
 import { validateCreateUserInput } from './validation';
 import { saveUser } from './repository';
 
-// Register user
+/**
+ * registerUser
+ *
+ * Function to save user in database
+ *
+ * @param req 		Request object
+ * @param res 		Response object
+ */
 export const registerUser = async (req: Request, res: Response) => {
+	// Validating user input
 	let { isValid, errors } = await validateCreateUserInput(req.body);
 
 	if (!isValid) {
@@ -14,6 +22,7 @@ export const registerUser = async (req: Request, res: Response) => {
 			.end();
 	}
 
+	// Save user and get any errors
 	const { savedUser, error } = await saveUser(req.body);
 
 	if (error) {
@@ -29,7 +38,14 @@ export const registerUser = async (req: Request, res: Response) => {
 		.end();
 };
 
-// Return user
+/**
+ * getUser
+ *
+ * Function to find one user in database
+ *
+ * @param req			Request object
+ * @param res			Response object
+ */
 export const getUser = (req: Request, res: Response) => {
 	return res
 		.status(302)
