@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { validateCreateUserInput } from './validation';
+import { validateCreateUserInput, validateFindUserInput } from './validation';
 import { saveUser } from './repository';
 
 /**
@@ -28,7 +28,7 @@ export const registerUser = async (req: Request, res: Response) => {
 	if (error) {
 		return res
 			.status(400)
-			.json({ success: false, errors: error })
+			.json({ success: false, errors: { ...error } })
 			.end();
 	}
 
@@ -47,6 +47,9 @@ export const registerUser = async (req: Request, res: Response) => {
  * @param res			Response object
  */
 export const getUser = (req: Request, res: Response) => {
+	const dataType = validateFindUserInput(req.params.query);
+
+	
 	return res
 		.status(302)
 		.json(req.body)

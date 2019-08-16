@@ -1,7 +1,9 @@
 import { isEmail, isLength, equals as isEquals } from 'validator';
+import { Types } from 'mongoose';
 
 import isEmpty from '../utils/is-empty';
 import { ErrorObject, ValidationResponse } from './types';
+import { isString } from 'util';
 
 /**
  * validateCreateUserInput
@@ -47,4 +49,33 @@ export const validateCreateUserInput = (data: any): ValidationResponse => {
 	}
 
 	return { isValid: isEmpty(errors), errors };
+};
+
+/**
+ * validateFindUserInput
+ *
+ * Function to validade and check fields
+ *
+ * @param {string} data ObjectId/Name/Email
+ */
+export const validateFindUserInput = (data: string) => {
+	let dataType: string | null = null;
+
+	if (data !== undefined) {
+		if (isEmail(data)) {
+			dataType = 'email';
+		}
+
+		if (Types.ObjectId.isValid(data)) {
+			dataType = 'ObjectId';
+		}
+
+		if (isString(data)) {
+			dataType = 'name';
+		}
+	} else {
+		return (dataType = null);
+	}
+
+	return dataType;
 };

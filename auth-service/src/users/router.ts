@@ -11,7 +11,7 @@ router.post('/register', userController.registerUser);
 router.get('/', userController.getUsers);
 
 // Return user data route
-router.get('/:id', userController.getUser);
+router.get('/:query', userController.getUser);
 
 // Update user route
 router.put('/:id', userController.editUser);
