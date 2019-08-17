@@ -3,7 +3,8 @@ import { hash } from 'bcrypt';
 import User from './model';
 import { SaveUserType, ErrorObject } from './types';
 
-/** ================================================================================================
+// =================================================================================================
+/**
  * saveUser
  *
  * Function to save user in the database
@@ -14,7 +15,7 @@ export const saveUser = async (data: SaveUserType) => {
 	const { name, email, password } = data;
 	let error: ErrorObject = {};
 
-	const user = await User.findOne(email, { password: 0 });
+	const user = await User.findOne({ email }, { password: 0 });
 
 	if (user) {
 		error.email = 'Email já cadastrado';
@@ -25,7 +26,7 @@ export const saveUser = async (data: SaveUserType) => {
 		};
 	}
 
-	const newUser = new User({
+	const newUser = await new User({
 		name,
 		email,
 		password: await hash(password, 10)
@@ -33,12 +34,11 @@ export const saveUser = async (data: SaveUserType) => {
 
 	let userSaved = await newUser.save();
 
-	delete userSaved.password;
-
-	return { savedUser: userSaved._doc, error };
+	return { savedUser: { ...userSaved._doc, password: null }, error };
 };
 
-/** ================================================================================================
+// =================================================================================================
+/**
  * findUsers
  *
  * Function to find user(s) in db
@@ -82,9 +82,14 @@ export const queryUser = async (query: string, queryType: string | null) => {
 	return { user, error };
 };
 
-
-/** ================================================================================================
- * 
- * 
- * 
+// =================================================================================================
+/**
+ *
+ *
+ *
  */
+export const findUsers = async () => {
+	const users = await User.find({}, { password: 0 });
+
+	return users;
+};

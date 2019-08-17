@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 
 import { validateCreateUserInput, validateFindUserInput } from './validation';
-import { saveUser, queryUser } from './repository';
+import { saveUser, queryUser, findUsers } from './repository';
+import isEmpty from '../utils/is-empty';
 
 //==================================================================================================
 /**
@@ -24,7 +25,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
 	const { savedUser, error } = await saveUser(req.body);
 
-	if (error) {
+	if (!isEmpty(error)) {
 		return res
 			.status(400)
 			.json({ success: false, errors: { ...error } })
@@ -75,10 +76,12 @@ export const getUser = async (req: Request, res: Response) => {
  * @param req
  * @param res
  */
-export const getUsers = (req: Request, res: Response) => {
+export const getUsers = async (_: Request, res: Response) => {
+	const users = await findUsers();
+
 	return res
 		.status(302)
-		.json(req.body)
+		.json(users)
 		.end();
 };
 

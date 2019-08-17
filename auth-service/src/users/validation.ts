@@ -14,6 +14,11 @@ import { isString } from 'util';
 export const validateCreateUserInput = (data: any): ValidationResponse => {
 	let errors: ErrorObject = {};
 
+	data.name = isEmpty(data.name) ? '' : data.name;
+	data.email = isEmpty(data.email) ? '' : data.email;
+	data.password = isEmpty(data.password) ? '' : data.password;
+	data.password2 = isEmpty(data.password2) ? '' : data.password2;
+
 	// Empty validations
 	if (isEmpty(data.name)) {
 		errors.name = 'O campo nome não pode ser vazio';
