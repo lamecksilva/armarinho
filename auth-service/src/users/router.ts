@@ -8,7 +8,7 @@ const router = Router();
 router.post('/register', userController.registerUser);
 
 // Return all Users route
-router.get('/', userController.getUsers);
+router.get('/all', userController.getUsers);
 
 // Return user data route
 router.get('/:query', userController.getUser);

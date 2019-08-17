@@ -5,6 +5,7 @@ import isEmpty from '../utils/is-empty';
 import { ErrorObject, ValidationResponse } from './types';
 import { isString } from 'util';
 
+//==================================================================================================
 /**
  * validateCreateUserInput
  *
@@ -56,6 +57,7 @@ export const validateCreateUserInput = (data: any): ValidationResponse => {
 	return { isValid: isEmpty(errors), errors };
 };
 
+//==================================================================================================
 /**
  * validateFindUserInput
  *
