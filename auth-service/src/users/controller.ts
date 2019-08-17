@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 
 import { validateCreateUserInput, validateFindUserInput } from './validation';
-import { saveUser } from './repository';
+import { saveUser, queryUser } from './repository';
 
+//==================================================================================================
 /**
  * registerUser
  *
@@ -12,7 +13,6 @@ import { saveUser } from './repository';
  * @param res 		Response object
  */
 export const registerUser = async (req: Request, res: Response) => {
-	// Validating user input
 	let { isValid, errors } = await validateCreateUserInput(req.body);
 
 	if (!isValid) {
@@ -22,7 +22,6 @@ export const registerUser = async (req: Request, res: Response) => {
 			.end();
 	}
 
-	// Save user and get any errors
 	const { savedUser, error } = await saveUser(req.body);
 
 	if (error) {
@@ -38,6 +37,7 @@ export const registerUser = async (req: Request, res: Response) => {
 		.end();
 };
 
+//==================================================================================================
 /**
  * getUser
  *
@@ -46,17 +46,35 @@ export const registerUser = async (req: Request, res: Response) => {
  * @param req			Request object
  * @param res			Response object
  */
-export const getUser = (req: Request, res: Response) => {
-	const dataType = validateFindUserInput(req.params.query);
+export const getUser = async (req: Request, res: Response) => {
+	const { query } = req.params;
 
-	
+	const queryType = await validateFindUserInput(query);
+
+	const { user, error } = await queryUser(query, queryType);
+
+	if (error) {
+		return res
+			.status(400)
+			.json({ success: false, errors: error })
+			.end();
+	}
+
 	return res
 		.status(302)
-		.json(req.body)
+		.json(user)
 		.end();
 };
 
-// Return all users
+//==================================================================================================
+/**
+ * getUsers
+ *
+ * Return all users from database
+ *
+ * @param req
+ * @param res
+ */
 export const getUsers = (req: Request, res: Response) => {
 	return res
 		.status(302)
@@ -64,7 +82,15 @@ export const getUsers = (req: Request, res: Response) => {
 		.end();
 };
 
-// Edit user
+//==================================================================================================
+/**
+ * editUser
+ *
+ * Edit a user from id
+ *
+ * @param req
+ * @param res
+ */
 export const editUser = (req: Request, res: Response) => {
 	return res
 		.status(201)
@@ -72,8 +98,32 @@ export const editUser = (req: Request, res: Response) => {
 		.end();
 };
 
-// Delete user
+//==================================================================================================
+/**
+ * deleteUser
+ *
+ * Delete a user from id
+ *
+ * @param req
+ * @param res
+ */
 export const deleteUser = (req: Request, res: Response) => {
+	return res
+		.status(200)
+		.json(req.body)
+		.end();
+};
+
+//==================================================================================================
+/**
+ * loginUser
+ *
+ * Verify credentials and return user data in jwt token
+ *
+ * @param req
+ * @param res
+ */
+export const loginUser = (req: Request, res: Response) => {
 	return res
 		.status(200)
 		.json(req.body)

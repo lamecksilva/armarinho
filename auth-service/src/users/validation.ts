@@ -59,23 +59,23 @@ export const validateCreateUserInput = (data: any): ValidationResponse => {
  * @param {string} data ObjectId/Name/Email
  */
 export const validateFindUserInput = (data: string) => {
-	let dataType: string | null = null;
+	let queryType: string | null = null;
 
 	if (data !== undefined) {
 		if (isEmail(data)) {
-			dataType = 'email';
+			queryType = 'email';
 		}
 
 		if (Types.ObjectId.isValid(data)) {
-			dataType = 'ObjectId';
+			queryType = 'id';
 		}
 
 		if (isString(data)) {
-			dataType = 'name';
+			queryType = 'name';
 		}
 	} else {
-		return (dataType = null);
+		return (queryType = null);
 	}
 
-	return dataType;
+	return queryType;
 };

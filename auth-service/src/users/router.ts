@@ -19,4 +19,7 @@ router.put('/:id', userController.editUser);
 // Delete user route
 router.delete('/:id', userController.deleteUser);
 
+// Login route
+router.post('/login', userController.loginUser);
+
 export default router;
