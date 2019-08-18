@@ -199,9 +199,17 @@ export const validateUser = async (data: any, type: string) => {
 		return { error, token: null };
 	}
 
-	user = { ...user, password: null };
+	const payload: any = {
+		id: user._doc._id,
+		name: user._doc.name,
+		email: user._doc.email,
+		createdAt: user._doc.createdAt,
+		updatedAt: user._doc.updatedAt
+	};
 
-	const token = await jwtSign(user, process.env.SECRET_OR_KEY || 'secret');
+	const token = await jwtSign(payload, process.env.SECRET_OR_KEY || 'secret', {
+		expiresIn: '1h'
+	});
 
 	return { token, error };
 };

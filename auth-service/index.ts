@@ -44,10 +44,10 @@ app.get('/', (_, res: Response) => res.send('Hello from AUTH-service'));
 // 		return res.status(400).json({ errors });
 // 	}
 
-// 	// const refreshToken = await jwtSign(
-// 	// 	{ provisoryItem: 'Provisory Value', provisoryItem2: 'Provisory Value 2' },
-// 	// 	'secret'
-// 	// );
+// const refreshToken = await jwtSign(
+// 	{ provisoryItem: 'Provisory Value', provisoryItem2: 'Provisory Value 2' },
+// 	'secret'
+// );
 
 // 	return res.status(200).json({
 // 		tokenType: 'Bearer',
@@ -73,7 +73,7 @@ app.get('/protected', async (req: Request, res: Response) => {
 		)
 		.catch(err => {
 			return res.status(401).json({
-				success: err != undefined,
+				success: err,
 				error: { message: 'JWT Token inválido' }
 			});
 		});

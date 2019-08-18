@@ -185,6 +185,6 @@ export const loginUser = async (req: Request, res: Response) => {
 
 	return res
 		.status(200)
-		.json({ success: true, token })
+		.json({ success: true, token, expiresIn: '1h' })
 		.end();
 };
