@@ -50,7 +50,9 @@ export const queryUser = async (query: string, queryType: string | null) => {
 	let error: ErrorObject = {};
 
 	if (queryType === 'id') {
-		user = await User.findOne({ _id: query });
+		user = await User.findOne({ _id: query }, { password: 0, __v: 0 });
+
+		console.log(user);
 
 		if (!user) {
 			error.query = 'ID não encontrado no banco de dados';
@@ -60,7 +62,7 @@ export const queryUser = async (query: string, queryType: string | null) => {
 	}
 
 	if (queryType === 'email') {
-		user = await User.findOne({ email: query });
+		user = await User.findOne({ email: query }, { password: 0, __v: 0 });
 
 		if (!user) {
 			error.query = 'Email não encontrado no banco de dados';
@@ -70,7 +72,9 @@ export const queryUser = async (query: string, queryType: string | null) => {
 	}
 
 	if (query === 'name') {
-		user = await User.findOne({ name: query });
+		user = await User.findOne({ name: query }, { password: 0, __v: 0 });
+
+		console.log(user);
 
 		if (!user) {
 			error.query = 'Nome não encontrado no bando de dados';
@@ -92,4 +96,33 @@ export const findUsers = async () => {
 	const users = await User.find({}, { password: 0, __v: 0 });
 
 	return users;
+};
+
+// =================================================================================================
+/**
+ *	updateUser
+ *
+ *	Function to find and update user
+ */
+export const updateUser = async (data: any, id: string) => {
+	const error: ErrorObject = {};
+
+	const user = await User.findOne({ _id: id });
+
+	if (!user) {
+		error.id = 'ID for this user not found';
+		return { error, user: null };
+	}
+
+	const updatedUser: any = await User.findOneAndUpdate(
+		{ _id: id },
+		{
+			$set: { email: data.email, name: data.name }
+		},
+		{
+			new: true
+		}
+	);
+
+	return { user: updatedUser._doc, error };
 };

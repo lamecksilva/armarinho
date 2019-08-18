@@ -1,7 +1,11 @@
 import { Request, Response } from 'express';
 
-import { validateCreateUserInput, validateFindUserInput } from './validation';
-import { saveUser, queryUser, findUsers } from './repository';
+import {
+	validateCreateUserInput,
+	validateFindUserInput,
+	validateEditUserInput
+} from './validation';
+import { saveUser, queryUser, findUsers, updateUser } from './repository';
 import isEmpty from '../utils/is-empty';
 
 //==================================================================================================
@@ -54,7 +58,7 @@ export const getUser = async (req: Request, res: Response) => {
 
 	const { user, error } = await queryUser(query, queryType);
 
-	if (error) {
+	if (!isEmpty(error)) {
 		return res
 			.status(400)
 			.json({ success: false, errors: error })
@@ -94,10 +98,28 @@ export const getUsers = async (_: Request, res: Response) => {
  * @param req
  * @param res
  */
-export const editUser = (req: Request, res: Response) => {
+export const editUser = async (req: Request, res: Response) => {
+	const { isValid, errors } = await validateEditUserInput(req.body);
+
+	if (!isValid) {
+		return res
+			.status(400)
+			.json({ success: false, errors })
+			.end();
+	}
+
+	const { user, error } = await updateUser(req.body, req.params.id);
+
+	if (!isEmpty(error)) {
+		return res
+			.status(400)
+			.json({ success: false, errors: error })
+			.end();
+	}
+
 	return res
 		.status(201)
-		.json(req.body)
+		.json({ success: true, user })
 		.end();
 };
 

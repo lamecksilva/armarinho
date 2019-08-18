@@ -3,7 +3,6 @@ import { Types } from 'mongoose';
 
 import isEmpty from '../utils/is-empty';
 import { ErrorObject, ValidationResponse } from './types';
-import { isString } from 'util';
 
 //==================================================================================================
 /**
@@ -71,13 +70,9 @@ export const validateFindUserInput = (data: string) => {
 	if (data !== undefined) {
 		if (isEmail(data)) {
 			queryType = 'email';
-		}
-
-		if (Types.ObjectId.isValid(data)) {
+		} else if (Types.ObjectId.isValid(data)) {
 			queryType = 'id';
-		}
-
-		if (isString(data)) {
+		} else {
 			queryType = 'name';
 		}
 	} else {
@@ -85,4 +80,42 @@ export const validateFindUserInput = (data: string) => {
 	}
 
 	return queryType;
+};
+
+//==================================================================================================
+/**
+ * validateEditUserInput
+ *
+ * Function to validade and check fields
+ *
+ * @param {string} data ObjectId/Name/Email
+ */
+export const validateEditUserInput = (data: any): ValidationResponse => {
+	let errors: ErrorObject = {};
+
+	data.name = isEmpty(data.name) ? '' : data.name;
+	data.email = isEmpty(data.email) ? '' : data.email;
+
+	// Empty validations
+	if (isEmpty(data.name)) {
+		errors.name = 'O campo nome não pode ser vazio';
+	}
+
+	if (isEmpty(data.email)) {
+		errors.email = 'O campo email não pode ser vazio';
+	}
+
+	// Lenght validations
+	if (!isLength(data.name, { min: 2, max: 40 })) {
+		errors.name = 'O nome deve conter entre 2 e 40 caracteres';
+	}
+
+	if (!isEmail(data.email)) {
+		errors.email = 'Endereço de email inválido';
+	}
+
+	return {
+		isValid: isEmpty(errors),
+		errors
+	};
 };
