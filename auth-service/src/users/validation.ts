@@ -119,3 +119,31 @@ export const validateEditUserInput = (data: any): ValidationResponse => {
 		errors
 	};
 };
+
+export const validateLoginInput = (data: any) => {
+	let errors: ErrorObject = {};
+	let type: string;
+
+	data.username = isEmpty(data.username) ? '' : data.username;
+	data.password = isEmpty(data.password) ? '' : data.password;
+
+	if (isEmpty(data.username)) {
+		errors.username = 'O campo username não pode ser vazio';
+	}
+
+	if (isEmpty(data.password)) {
+		errors.password = 'O campo senha não pode ser vazio';
+	}
+
+	if (isEmail(data.username)) {
+		type = 'email';
+	} else {
+		type = 'name';
+	}
+
+	return {
+		isValid: isEmpty(errors),
+		type,
+		errors
+	};
+};

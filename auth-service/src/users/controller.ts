@@ -3,14 +3,16 @@ import { Request, Response } from 'express';
 import {
 	validateCreateUserInput,
 	validateFindUserInput,
-	validateEditUserInput
+	validateEditUserInput,
+	validateLoginInput
 } from './validation';
 import {
 	saveUser,
 	queryUser,
 	findUsers,
 	updateUser,
-	removeUser
+	removeUser,
+	validateUser
 } from './repository';
 import isEmpty from '../utils/is-empty';
 
@@ -165,9 +167,24 @@ export const deleteUser = async (req: Request, res: Response) => {
  * @param req
  * @param res
  */
-export const loginUser = (req: Request, res: Response) => {
+export const loginUser = async (req: Request, res: Response) => {
+	const { errors, isValid, type } = await validateLoginInput(req.body);
+
+	if (!isValid) {
+		return res.status(400).json({ success: false, errors });
+	}
+
+	const { token, error } = await validateUser(req.body, type);
+
+	if (!isEmpty(error)) {
+		return res
+			.status(400)
+			.json({ success: false, errors: error })
+			.end();
+	}
+
 	return res
 		.status(200)
-		.json(req.body)
+		.json({ success: true, token })
 		.end();
 };

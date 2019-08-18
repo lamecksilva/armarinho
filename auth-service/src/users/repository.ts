@@ -1,7 +1,8 @@
-import { hash } from 'bcrypt';
+import { hash, compare } from 'bcrypt';
 
 import User from './model';
 import { SaveUserType, ErrorObject } from './types';
+import jwtSign from '../utils/jwt-sign';
 
 // =================================================================================================
 /**
@@ -14,11 +15,23 @@ import { SaveUserType, ErrorObject } from './types';
 export const saveUser = async (data: SaveUserType) => {
 	const { name, email, password } = data;
 	let error: ErrorObject = {};
+	let user: any;
 
-	const user = await User.findOne({ email }, { password: 0 });
+	user = await User.findOne({ email }, { password: 0 });
 
 	if (user) {
 		error.email = 'Email já cadastrado';
+
+		return {
+			savedUser: null,
+			error
+		};
+	}
+
+	user = await User.findOne({ name }, { password: 0 });
+
+	if (user) {
+		error.name = 'Name já cadastrado';
 
 		return {
 			savedUser: null,
@@ -52,8 +65,6 @@ export const queryUser = async (query: string, queryType: string | null) => {
 	if (queryType === 'id') {
 		user = await User.findOne({ _id: query }, { password: 0, __v: 0 });
 
-		console.log(user);
-
 		if (!user) {
 			error.query = 'ID não encontrado no banco de dados';
 		}
@@ -73,8 +84,6 @@ export const queryUser = async (query: string, queryType: string | null) => {
 
 	if (query === 'name') {
 		user = await User.findOne({ name: query }, { password: 0, __v: 0 });
-
-		console.log(user);
 
 		if (!user) {
 			error.query = 'Nome não encontrado no bando de dados';
@@ -155,4 +164,44 @@ export const removeUser = async (id: string) => {
 	}
 
 	return { user, error };
+};
+
+// =================================================================================================
+/**
+ *	validateUser
+ *
+ *	Function to find and check cretentials
+ *
+ * 	@param {object} data name/email and password of the user
+ *  @param {string} type Type of username
+ */
+export const validateUser = async (data: any, type: string) => {
+	const error: ErrorObject = {};
+	let user: any;
+
+	type === 'email'
+		? (user = await User.findOne({ email: data.username }))
+		: type === 'name'
+		? (user = await User.findOne({ name: data.username }))
+		: null;
+
+	if (!user) {
+		error.email = 'Email não encontrado';
+
+		return { error, token: null };
+	}
+
+	const isValid = await compare(data.password, user.password);
+
+	if (!isValid) {
+		error.password = 'Senha incorreta';
+
+		return { error, token: null };
+	}
+
+	user = { ...user, password: null };
+
+	const token = await jwtSign(user, process.env.SECRET_OR_KEY || 'secret');
+
+	return { token, error };
 };
