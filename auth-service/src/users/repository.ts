@@ -203,6 +203,7 @@ export const validateUser = async (data: any, type: string) => {
 		id: user._doc._id,
 		name: user._doc.name,
 		email: user._doc.email,
+		userType: user._doc.userType,
 		createdAt: user._doc.createdAt,
 		updatedAt: user._doc.updatedAt
 	};
