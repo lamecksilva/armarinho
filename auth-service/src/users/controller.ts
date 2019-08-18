@@ -5,7 +5,13 @@ import {
 	validateFindUserInput,
 	validateEditUserInput
 } from './validation';
-import { saveUser, queryUser, findUsers, updateUser } from './repository';
+import {
+	saveUser,
+	queryUser,
+	findUsers,
+	updateUser,
+	removeUser
+} from './repository';
 import isEmpty from '../utils/is-empty';
 
 //==================================================================================================
@@ -132,10 +138,21 @@ export const editUser = async (req: Request, res: Response) => {
  * @param req
  * @param res
  */
-export const deleteUser = (req: Request, res: Response) => {
+export const deleteUser = async (req: Request, res: Response) => {
+	const { id } = req.params;
+
+	const { user, error } = await removeUser(id);
+
+	if (!isEmpty(error)) {
+		return res
+			.status(400)
+			.json({ success: false, errors: error })
+			.end();
+	}
+
 	return res
 		.status(200)
-		.json(req.body)
+		.json({ success: true, user })
 		.end();
 };
 

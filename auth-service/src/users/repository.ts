@@ -103,6 +103,10 @@ export const findUsers = async () => {
  *	updateUser
  *
  *	Function to find and update user
+ *
+ * 	@param {object} data Email and name to update
+ * 	@param {string} id ID of the user
+ *
  */
 export const updateUser = async (data: any, id: string) => {
 	const error: ErrorObject = {};
@@ -110,7 +114,7 @@ export const updateUser = async (data: any, id: string) => {
 	const user = await User.findOne({ _id: id });
 
 	if (!user) {
-		error.id = 'ID for this user not found';
+		error.id = 'ID not found';
 		return { error, user: null };
 	}
 
@@ -125,4 +129,30 @@ export const updateUser = async (data: any, id: string) => {
 	);
 
 	return { user: updatedUser._doc, error };
+};
+
+// =================================================================================================
+/**
+ *	removeUser
+ *
+ *	Function to find and delete user
+ *
+ * 	@param {string} id ID of the user
+ *
+ */
+export const removeUser = async (id: string) => {
+	const error: ErrorObject = {};
+
+	const user = await User.findOneAndDelete({ _id: id });
+
+	if (!user) {
+		error.id = 'ID not found';
+
+		return {
+			user: null,
+			error
+		};
+	}
+
+	return { user, error };
 };
