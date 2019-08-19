@@ -1,0 +1,31 @@
+{
+	"name": "admin-client",
+	"version": "0.1.0",
+	"description": "A admin client to armarinho",
+	"main": "index.ts",
+	"author": "Lameck",
+	"license": "MIT",
+	"private": false,
+	"scripts": {
+		"build": "webpack",
+		"start": "webpack-dev-server --mode development --inline --hot"
+	},
+	"devDependencies": {
+		"@types/react": "^16.9.2",
+		"@types/react-dom": "^16.8.5",
+		"awesome-typescript-loader": "^5.2.1",
+		"html-webpack-plugin": "^3.2.0",
+		"react-hot-loader": "^4.12.11",
+		"source-map-loader": "^0.2.4",
+		"typescript": "^3.5.3",
+		"webpack": "^4.39.2",
+		"webpack-cli": "^3.3.7",
+		"webpack-dev-middleware": "^3.7.0",
+		"webpack-dev-server": "^3.8.0",
+		"webpack-hot-middleware": "^2.25.0"
+	},
+	"dependencies": {
+		"react": "^16.9.0",
+		"react-dom": "^16.9.0"
+	}
+}
