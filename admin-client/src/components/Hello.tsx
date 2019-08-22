@@ -10,7 +10,7 @@ export interface HelloState {
 	count: number;
 }
 
-export class Hello extends React.Component<HelloProps, HelloState> {
+class Hello extends React.Component<HelloProps, HelloState> {
 	constructor(props: HelloProps) {
 		super(props);
 
@@ -37,3 +37,5 @@ export class Hello extends React.Component<HelloProps, HelloState> {
 		);
 	}
 }
+
+export default Hello;
