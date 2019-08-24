@@ -1,4 +1,12 @@
 import express, { Response } from 'express';
+import { start, captureError } from 'elastic-apm-node';
+
+start({
+	serviceName: 'Armarinho-Files-Service',
+	serverUrl: 'http://localhost:8200'
+});
+
+captureError(new Error('Deu ruim '));
 
 import applyRoutes from './app';
 
@@ -10,4 +18,10 @@ applyRoutes(app);
 
 const PORT = process.env.PORT || 9005;
 
-app.listen(PORT, () => console.log(`Files-Service running on port: ${PORT}`));
+app.listen(PORT, () =>
+	console.log(
+		`${new Date(Date.now()).toLocaleTimeString(
+			'pt-BR'
+		)}Files-Service running on port: ${PORT}`
+	)
+);

@@ -15,17 +15,17 @@ export const saveImage = async (req: Request, res: Response) => {
 
 	try {
 		// Creating folder name to save images in disk
-		const dirName = `${__dirname}/data`;
+		const dirName = `./data`;
 
 		// Check if folder exists
 		if (!existsSync(dirName)) {
 			// Create folder
-			mkdirSync(dirName, 777);
+			await mkdirSync(dirName);
 		}
 
 		// Creating the filename of the image
 		// timeStamp + sizeInBits + originalEtension
-		const fileName = `${dirName}/${Date.now()}-${req.file.size}${extname(
+		const fileName = `./${dirName}/${Date.now()}-${req.file.size}${extname(
 			req.file.originalname
 		)}`;
 
@@ -37,8 +37,6 @@ export const saveImage = async (req: Request, res: Response) => {
 		return res.json({ success: true, fileName });
 	} catch (err) {
 		console.error(err);
-
-		throw new Error(err);
 
 		return res.status(500).json({ success: false, err });
 	}
