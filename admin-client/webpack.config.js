@@ -2,6 +2,7 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+	entry: ['react-hot-loader/patch', './src'],
 	devtool: 'source-map',
 	module: {
 		rules: [
@@ -47,6 +48,7 @@ module.exports = {
 	devServer: {
 		port: 3000,
 		historyApiFallback: true,
-		inline: true
+		inline: true,
+		hot: true
 	}
 };

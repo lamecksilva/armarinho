@@ -1,12 +1,10 @@
 import express, { Response } from 'express';
-import { start, captureError } from 'elastic-apm-node';
+import { start } from 'elastic-apm-node';
 
 start({
-	serviceName: 'Armarinho-Files-Service',
+	serviceName: 'NameTest',
 	serverUrl: 'http://localhost:8200'
 });
-
-captureError(new Error('Deu ruim '));
 
 import applyRoutes from './app';
 
