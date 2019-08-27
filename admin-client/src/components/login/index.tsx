@@ -7,6 +7,25 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
+import { makeStyles } from '@material-ui/core/styles';
+
+const styles = makeStyles({
+	rootContainer: {
+		minHeight: '350px',
+		border: '1px solid #f5b5e5',
+		maxWidth: '400px',
+		marginTop: '10vh',
+		borderTopLeftRadius: '25px',
+		borderTopRightRadius: '25px',
+		borderBottomLeftRadius: '25px',
+		borderBottomRightRadius: '25px',
+		paddingLeft: 0,
+		paddingRight: 0
+	}
+});
+
+// import useStyles from './styles';
+
 export interface LoginState {
 	email: string;
 	password: string;
@@ -18,6 +37,8 @@ const login: React.FunctionComponent<RouteComponentProps> = () => {
 		password: ''
 	});
 
+	const classes = styles({});
+
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		event.preventDefault();
 
@@ -28,21 +49,7 @@ const login: React.FunctionComponent<RouteComponentProps> = () => {
 		<React.Fragment>
 			<CssBaseline />
 
-			<Container
-				maxWidth="sm"
-				style={{
-					minHeight: '350px',
-					border: '1px solid #f5b5e5',
-					maxWidth: '400px',
-					marginTop: '10vh',
-					borderTopLeftRadius: '25px',
-					borderTopRightRadius: '25px',
-					borderBottomLeftRadius: '25px',
-					borderBottomRightRadius: '25px',
-					paddingLeft: 0,
-					paddingRight: 0
-				}}
-			>
+			<Container maxWidth="sm" style={classes.rootContainer}>
 				<div
 					style={{
 						width: '100%',
