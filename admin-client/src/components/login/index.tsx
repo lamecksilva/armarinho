@@ -12,114 +12,104 @@ export interface LoginState {
 	password: string;
 }
 
-export interface LoginProps extends RouteComponentProps {}
+const login: React.FunctionComponent<RouteComponentProps> = () => {
+	const [values, setValues] = React.useState<LoginState>({
+		email: '',
+		password: ''
+	});
 
-class Login extends React.Component<LoginProps, LoginState> {
-	constructor(props: LoginProps) {
-		super(props);
-
-		this.state = {
-			email: '',
-			password: ''
-		};
-
-		this.handleChange = this.handleChange.bind(this);
-	}
-
-	handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		event.preventDefault();
 
-		// this.setState({ [event.target.name]: event.target.value });
-	}
+		setValues({ ...values, [event.target.name]: event.target.value });
+	};
 
-	render() {
-		return (
-			<React.Fragment>
-				<CssBaseline />
+	return (
+		<React.Fragment>
+			<CssBaseline />
 
-				<Container
-					maxWidth="sm"
+			<Container
+				maxWidth="sm"
+				style={{
+					minHeight: '350px',
+					border: '1px solid #f5b5e5',
+					maxWidth: '400px',
+					marginTop: '10vh',
+					borderTopLeftRadius: '25px',
+					borderTopRightRadius: '25px',
+					borderBottomLeftRadius: '25px',
+					borderBottomRightRadius: '25px',
+					paddingLeft: 0,
+					paddingRight: 0
+				}}
+			>
+				<div
 					style={{
-						minHeight: '350px',
-						border: '1px solid #f5b5e5',
-						maxWidth: '400px',
-						marginTop: '10vh',
-						borderTopLeftRadius: '25px',
+						width: '100%',
+						backgroundColor: '#ed3975',
 						borderTopRightRadius: '25px',
-						borderBottomLeftRadius: '25px',
-						borderBottomRightRadius: '25px',
-						paddingLeft: 0,
-						paddingRight: 0
+						borderTopLeftRadius: '25px',
+						height: '75px',
+						textAlign: 'center'
 					}}
 				>
-					<div
-						style={{
-							width: '100%',
-							backgroundColor: '#ed3975',
-							borderTopRightRadius: '25px',
-							borderTopLeftRadius: '25px',
-							height: '75px',
-							textAlign: 'center'
-						}}
+					<Typography
+						variant="h4"
+						style={{ paddingTop: '3vh', color: '#f5bccf' }}
 					>
-						<Typography
-							variant="h4"
-							style={{ paddingTop: '3vh', color: '#f5bccf' }}
-						>
-							Login
-						</Typography>
-					</div>
-					<Grid container>
-						<Grid item xs={12} sm={12} md={12}>
-							<TextField
-								style={{
-									width: '80%',
-									marginLeft: '10%',
-									marginRight: '10%',
-									marginTop: '30px'
-								}}
-								name="email"
-								type="email"
-								variant="outlined"
-								placeholder="Digite seu email"
-								onChange={this.handleChange}
-							/>
-						</Grid>
-
-						<Grid item xs={12} sm={12} md={12}>
-							<TextField
-								style={{
-									width: '80%',
-									marginLeft: '10%',
-									marginRight: '10%',
-									marginTop: '15px'
-								}}
-								name="password"
-								type="password"
-								variant="outlined"
-								placeholder="Digite sua senha"
-								onChange={this.handleChange}
-							/>
-						</Grid>
-
-						<Button
-							variant="contained"
+						Login
+					</Typography>
+				</div>
+				<Grid container>
+					<Grid item xs={12} sm={12} md={12}>
+						<TextField
 							style={{
 								width: '80%',
-								marginLeft: 'auto',
-								marginRight: 'auto',
-								marginTop: '30px',
-								backgroundColor: '#ed3975',
-								color: '#f5bccf'
+								marginLeft: '10%',
+								marginRight: '10%',
+								marginTop: '30px'
 							}}
-						>
-							Login
-						</Button>
+							name="email"
+							type="email"
+							variant="outlined"
+							placeholder="Digite seu email"
+							onChange={handleChange}
+						/>
 					</Grid>
-				</Container>
-			</React.Fragment>
-		);
-	}
-}
 
-export default Login;
+					<Grid item xs={12} sm={12} md={12}>
+						<TextField
+							style={{
+								width: '80%',
+								marginLeft: '10%',
+								marginRight: '10%',
+								marginTop: '15px'
+							}}
+							name="password"
+							type="password"
+							variant="outlined"
+							placeholder="Digite sua senha"
+							onChange={handleChange}
+						/>
+					</Grid>
+
+					<Button
+						variant="contained"
+						style={{
+							width: '80%',
+							marginLeft: 'auto',
+							marginRight: 'auto',
+							marginTop: '30px',
+							backgroundColor: '#ed3975',
+							color: '#f5bccf'
+						}}
+					>
+						Login
+					</Button>
+				</Grid>
+			</Container>
+		</React.Fragment>
+	);
+};
+
+export default login;
