@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
+import { Link, LinkProps } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
@@ -13,6 +14,18 @@ export interface LoginState {
 	email: string;
 	password: string;
 }
+
+const CollisionLink = React.forwardRef<
+	HTMLAnchorElement,
+	Omit<LinkProps, 'innerRef' | 'to'>
+>((props, ref) => (
+	<Link
+		innerRef={ref as any}
+		to="/dashboard"
+		{...props}
+		style={{ textDecoration: 'none' }}
+	/>
+));
 
 const Login: React.FunctionComponent<RouteComponentProps> = props => {
 	const [values, setValues] = React.useState<LoginState>({
@@ -72,6 +85,7 @@ const Login: React.FunctionComponent<RouteComponentProps> = props => {
 					<Typography
 						variant="subtitle1"
 						className={classes.esqueceuSenhaStyle}
+						component={CollisionLink}
 					>
 						Esqueceu a senha?
 					</Typography>
