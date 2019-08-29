@@ -41,6 +41,12 @@ const Login: React.FunctionComponent<RouteComponentProps> = props => {
 		setValues({ ...values, [event.target.name]: event.target.value });
 	};
 
+	const handleLoginSubmit = (event: React.MouseEvent) => {
+		event.preventDefault();
+
+		props.history.push('/dashboard');
+	};
+
 	return (
 		<React.Fragment>
 			<CssBaseline />
@@ -78,6 +84,7 @@ const Login: React.FunctionComponent<RouteComponentProps> = props => {
 						variant="contained"
 						type="submit"
 						className={classes.buttonStyle}
+						onClick={handleLoginSubmit}
 					>
 						Login
 					</Button>

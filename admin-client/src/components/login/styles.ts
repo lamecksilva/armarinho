@@ -21,6 +21,7 @@ export default makeStyles((theme: Theme) =>
 		loginHeader: {
 			width: '100%',
 			height: '90px',
+			marginBottom: '20px',
 			borderTopRightRadius: '20px',
 			borderTopLeftRadius: '20px',
 			textAlign: 'center',

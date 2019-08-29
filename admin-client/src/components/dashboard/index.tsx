@@ -1,27 +1,42 @@
 import * as React from 'react';
+import { RouteComponentProps } from 'react-router';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
 
-export interface DashboardState {
-	counter: number;
-}
+import MenuIcon from '@material-ui/icons/Menu';
 
-export interface DashboardProps {}
+interface DashboardProps extends RouteComponentProps {}
 
-class Dashboard extends React.Component<DashboardProps, DashboardState> {
-	constructor(props: DashboardState) {
-		super(props);
+const Dashboard: React.FunctionComponent<DashboardProps> = props => {
+	return (
+		<Container>
+			<Container>
+				<AppBar position="fixed">
+					<Toolbar>
+						<IconButton edge="start" color="inherit">
+							<MenuIcon />
+						</IconButton>
+					</Toolbar>
+				</AppBar>
+			</Container>
 
-		this.state = {
-			counter: 0
-		};
-	}
+			<Container>
+				<Typography variant="h3">Dashboard</Typography>
 
-	render(): JSX.Element {
-		return (
-			<h1>
-				<h3>Dashboard</h3>
-			</h1>
-		);
-	}
-}
+				<Button
+					variant="contained"
+					color="primary"
+					onClick={() => props.history.push('/login')}
+				>
+					Back to Login
+				</Button>
+			</Container>
+		</Container>
+	);
+};
 
 export default Dashboard;
