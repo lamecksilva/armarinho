@@ -7,16 +7,19 @@ export default makeStyles((theme: Theme) =>
 			maxWidth: '500px',
 			paddingLeft: 0,
 			paddingRight: 0,
-			marginTop: '10vh',
+			marginTop: '30%',
 
 			boxShadow: '0px 0px 23px 0px gray',
-			// [theme.breakpoints.up('sm')]: {
-			// 	boxShadow: '0px 0px 23px 0px red'
-			// },
+
 			borderTopLeftRadius: '20px',
 			borderTopRightRadius: '20px',
 			borderBottomLeftRadius: '20px',
-			borderBottomRightRadius: '20px'
+			borderBottomRightRadius: '20px',
+
+			[theme.breakpoints.down('sm')]: {
+				// boxShadow: '0px 0px 23px 0px red',
+				width: '350px'
+			}
 		},
 		loginHeader: {
 			width: '100%',
@@ -31,7 +34,11 @@ export default makeStyles((theme: Theme) =>
 			paddingTop: '5%',
 			fontSize: '1.8rem',
 			fontFamily: "'Varela Round', sans-serif",
-			color: '#e0f7fa'
+			color: '#e0f7fa',
+
+			[theme.breakpoints.down('sm')]: {
+				fontSize: '1.5rem'
+			}
 		},
 		textFieldStyle: {
 			width: '80%',

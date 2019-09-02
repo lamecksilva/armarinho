@@ -2,7 +2,6 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link, LinkProps } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -48,9 +47,7 @@ const Login: React.FunctionComponent<RouteComponentProps> = props => {
 	};
 
 	return (
-		<React.Fragment>
-			<CssBaseline />
-
+		<>
 			<Container maxWidth="sm" className={classes.rootContainer}>
 				<div className={classes.loginHeader}>
 					<Typography variant="h5" className={classes.loginHeaderTitle}>
@@ -98,7 +95,7 @@ const Login: React.FunctionComponent<RouteComponentProps> = props => {
 					</Typography>
 				</Grid>
 			</Container>
-		</React.Fragment>
+		</>
 	);
 };
 
