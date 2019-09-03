@@ -74,7 +74,7 @@ export const getUser = async (req: Request, res: Response) => {
 	}
 
 	return res
-		.status(302)
+		.status(200)
 		.json(user)
 		.end();
 };
@@ -92,7 +92,7 @@ export const getUsers = async (_: Request, res: Response) => {
 	const users = await findUsers();
 
 	return res
-		.status(302)
+		.status(200)
 		.json(users)
 		.end();
 };

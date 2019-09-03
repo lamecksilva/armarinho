@@ -11,6 +11,7 @@ export default makeStyles((theme: Theme) =>
 		},
 		logoutButton: {
 			fontFamily: "'Varela Round', sans-serif",
+			textTransform: 'none',
 			marginLeft: 'auto'
 		},
 		drawer: {

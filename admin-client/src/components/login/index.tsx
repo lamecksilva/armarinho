@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
-import CollisionLink from "../adapterlink"
+import CollisionLink from '../adapterlink';
 import useStyles from './styles';
 
 export interface LoginState {
@@ -74,13 +74,13 @@ const Login: React.FunctionComponent<RouteComponentProps> = props => {
 					Login
 				</Button>
 
-				<Typography
-					variant="subtitle1"
-					className={classes.esqueceuSenhaStyle}
+				<Button
+					to="/dashboard"
 					component={CollisionLink}
+					className={classes.esqueceuSenhaStyle}
 				>
-					Esqueceu a senha?
-				</Typography>
+					<Typography variant="subtitle1">Esqueceu a senha?</Typography>
+				</Button>
 			</Grid>
 		</Container>
 	);

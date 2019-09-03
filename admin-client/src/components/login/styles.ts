@@ -76,6 +76,8 @@ export default makeStyles((theme: Theme) =>
 			borderRadius: '1em'
 		},
 		esqueceuSenhaStyle: {
+			fontFamily: "'Varela Round', sans-serif",
+			textTransform: 'none',
 			margin: '1rem auto 1rem auto',
 			color: theme.palette.secondary.dark
 		}

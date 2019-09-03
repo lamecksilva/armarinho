@@ -3,6 +3,7 @@ import express, { Response, Request, NextFunction } from 'express';
 import httpProxy from 'express-http-proxy';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import cors from 'cors';
 import isReachable from 'is-reachable';
 
 // Module with services urls
@@ -10,6 +11,7 @@ import urls from './utils/urls';
 
 const app = express();
 
+app.use(cors());
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(express.json());

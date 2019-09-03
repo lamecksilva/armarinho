@@ -50,7 +50,7 @@ const Navbar: React.FC<NavbarProps> = props => {
 						onClick={() => props.history.push('/login')}
 						className={classes.logoutButton}
 					>
-						Sair
+						<Typography variant="subtitle1">Sair</Typography>
 					</Button>
 				</Toolbar>
 			</AppBar>
@@ -69,7 +69,12 @@ const Navbar: React.FC<NavbarProps> = props => {
 				<Divider />
 				<List>
 					{drawerOptions.map(item => (
-						<ListItem button component={AdapterLink} to={item.url}>
+						<ListItem
+							button
+							component={AdapterLink}
+							to={item.url}
+							key={item.name}
+						>
 							<ListItemIcon>{item.icon}</ListItemIcon>
 							<ListItemText primary={item.name} />
 						</ListItem>
