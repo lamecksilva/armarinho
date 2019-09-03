@@ -1,27 +1,14 @@
 import * as React from 'react';
+import { RouteComponentProps } from 'react-router';
 
-export interface DashboardState {
-	counter: number;
-}
+interface UserProps extends RouteComponentProps {}
 
-export interface DashboardProps {}
+const Users: React.FC<UserProps> = props => {
+	return (
+		<>
+			<h1>Hello world</h1>
+		</>
+	);
+};
 
-class Dashboard extends React.Component<DashboardProps, DashboardState> {
-	constructor(props: DashboardState) {
-		super(props);
-
-		this.state = {
-			counter: 0
-		};
-	}
-
-	render(): JSX.Element {
-		return (
-			<h1>
-				<h3>Dashboard</h3>
-			</h1>
-		);
-	}
-}
-
-export default Dashboard;
+export default Users;

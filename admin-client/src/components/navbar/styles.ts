@@ -17,6 +17,13 @@ export default makeStyles((theme: Theme) =>
 			'& .MuiDrawer-paper': {
 				width: '250px'
 			}
+		},
+		toolbar: {
+			display: 'flex',
+			alignItems: 'center',
+			padding: theme.spacing(0, 1),
+			...theme.mixins.toolbar,
+			justifyContent: 'flex-end'
 		}
 	})
 );

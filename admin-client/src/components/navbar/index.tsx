@@ -7,17 +7,20 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Container from '@material-ui/core/Container';
 import IconButton from '@material-ui/core/IconButton';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
 
 import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import useStyles from './styles';
-import {
-	Drawer,
-	List,
-	ListItemIcon,
-	ListItem,
-	ListItemText
-} from '@material-ui/core';
+
+import AdapterLink from '../adapterlink';
+import drawerOptions from './drawerOptions';
 
 interface NavbarProps extends RouteComponentProps {}
 
@@ -51,19 +54,26 @@ const Navbar: React.FC<NavbarProps> = props => {
 					</Button>
 				</Toolbar>
 			</AppBar>
+
 			<Drawer
 				className={classes.drawer}
 				open={drawerOpen}
 				onClose={toggleDrawer}
 				anchor="left"
 			>
+				<div className={classes.toolbar}>
+					<IconButton onClick={toggleDrawer}>
+						<ChevronLeftIcon />
+					</IconButton>
+				</div>
+				<Divider />
 				<List>
-					<ListItem button>
-						<ListItemIcon>
-							<MenuIcon />
-						</ListItemIcon>
-						<ListItemText primary="Home" />
-					</ListItem>
+					{drawerOptions.map(item => (
+						<ListItem button component={AdapterLink} to={item.url}>
+							<ListItemIcon>{item.icon}</ListItemIcon>
+							<ListItemText primary={item.name} />
+						</ListItem>
+					))}
 				</List>
 			</Drawer>
 		</Container>
