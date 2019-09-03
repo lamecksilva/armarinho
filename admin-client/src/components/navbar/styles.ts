@@ -12,6 +12,11 @@ export default makeStyles((theme: Theme) =>
 		logoutButton: {
 			fontFamily: "'Varela Round', sans-serif",
 			marginLeft: 'auto'
+		},
+		drawer: {
+			'& .MuiDrawer-paper': {
+				width: '250px'
+			}
 		}
 	})
 );

@@ -11,17 +11,32 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import useStyles from './styles';
+import {
+	Drawer,
+	List,
+	ListItemIcon,
+	ListItem,
+	ListItemText
+} from '@material-ui/core';
 
 interface NavbarProps extends RouteComponentProps {}
 
 const Navbar: React.FC<NavbarProps> = props => {
 	const classes = useStyles(props);
 
+	const [drawerOpen, setDrawerOpen] = React.useState(false);
+
+	const toggleDrawer = (event: React.KeyboardEvent | React.MouseEvent) => {
+		event.preventDefault();
+
+		setDrawerOpen(!drawerOpen);
+	};
+
 	return (
 		<Container>
 			<AppBar position="fixed">
 				<Toolbar>
-					<IconButton edge="start" color="inherit">
+					<IconButton edge="start" color="inherit" onClick={toggleDrawer}>
 						<MenuIcon />
 					</IconButton>
 					<Typography variant="h6" className={classes.appBarBrandName}>
@@ -36,6 +51,21 @@ const Navbar: React.FC<NavbarProps> = props => {
 					</Button>
 				</Toolbar>
 			</AppBar>
+			<Drawer
+				className={classes.drawer}
+				open={drawerOpen}
+				onClose={toggleDrawer}
+				anchor="left"
+			>
+				<List>
+					<ListItem button>
+						<ListItemIcon>
+							<MenuIcon />
+						</ListItemIcon>
+						<ListItemText primary="Home" />
+					</ListItem>
+				</List>
+			</Drawer>
 		</Container>
 	);
 };

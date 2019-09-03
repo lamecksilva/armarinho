@@ -13,7 +13,7 @@ interface DashboardProps extends RouteComponentProps {}
 
 const Dashboard: React.FunctionComponent<DashboardProps> = props => {
 	return (
-		<Container style={{ marginTop: '15%' }}>
+		<Container style={{ marginTop: '60px', display: 'flex' }}>
 			<Typography variant="h3">Dashboard</Typography>
 
 			<Button
