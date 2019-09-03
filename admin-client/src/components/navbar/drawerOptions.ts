@@ -1,7 +1,6 @@
 export default [
 	{
-		name: "Home",
-		url: "/dashboard",
-		
+		name: 'Home',
+		url: '/dashboard'
 	}
-]
+];

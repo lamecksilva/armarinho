@@ -19,17 +19,12 @@ class App extends React.Component {
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
 				<Router>
-					<>
-						<Switch>
-							<Route exact path="/" component={Home} />
-							<Route path="/login" component={Login} />
-						</Switch>
-						<Switch>
-							<Navbar />
-							<Route path="/hello" component={Hello} />
-							<Route path="/dashboard" component={Dashboard} />
-						</Switch>
-					</>
+					<Navbar />
+
+					<Route exact path="/" component={Home} />
+					<Route path="/login" component={Login} />
+					<Route path="/hello" component={Hello} />
+					<Route path="/dashboard" component={Dashboard} />
 				</Router>
 			</ThemeProvider>
 		);

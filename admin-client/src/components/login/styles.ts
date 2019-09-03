@@ -7,7 +7,7 @@ export default makeStyles((theme: Theme) =>
 			maxWidth: '500px',
 			paddingLeft: 0,
 			paddingRight: 0,
-			marginTop: '30%',
+			marginTop: '10%',
 
 			boxShadow: '0px 0px 23px 0px gray',
 
@@ -16,9 +16,15 @@ export default makeStyles((theme: Theme) =>
 			borderBottomLeftRadius: '20px',
 			borderBottomRightRadius: '20px',
 
-			[theme.breakpoints.down('sm')]: {
+			[theme.breakpoints.down('md')]: {
+				// boxShadow: '0px 0px 23px 0px blue',
+				width: '450px',
+				marginTop: '15%'
+			},
+			[theme.breakpoints.down('xs')]: {
 				// boxShadow: '0px 0px 23px 0px red',
-				width: '350px'
+				width: '350px',
+				marginTop: '30%'
 			}
 		},
 		loginHeader: {

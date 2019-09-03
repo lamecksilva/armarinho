@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link, LinkProps } from 'react-router-dom';
+
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -47,55 +48,53 @@ const Login: React.FunctionComponent<RouteComponentProps> = props => {
 	};
 
 	return (
-		<>
-			<Container maxWidth="sm" className={classes.rootContainer}>
-				<div className={classes.loginHeader}>
-					<Typography variant="h5" className={classes.loginHeaderTitle}>
-						Armarinho Admin Login
-					</Typography>
-				</div>
-				<Grid container>
-					<Grid item xs={12} sm={12} md={12}>
-						<TextField
-							className={classes.textFieldStyle}
-							name="email"
-							type="email"
-							variant="outlined"
-							placeholder="Digite seu email"
-							onChange={handleChange}
-						/>
-					</Grid>
-
-					<Grid item xs={12} sm={12} md={12}>
-						<TextField
-							className={classes.textFieldStyle}
-							name="password"
-							type="password"
-							variant="outlined"
-							placeholder="Digite sua senha"
-							onChange={handleChange}
-						/>
-					</Grid>
-
-					<Button
-						variant="contained"
-						type="submit"
-						className={classes.buttonStyle}
-						onClick={handleLoginSubmit}
-					>
-						Login
-					</Button>
-
-					<Typography
-						variant="subtitle1"
-						className={classes.esqueceuSenhaStyle}
-						component={CollisionLink}
-					>
-						Esqueceu a senha?
-					</Typography>
+		<Container maxWidth="sm" className={classes.rootContainer}>
+			<div className={classes.loginHeader}>
+				<Typography variant="h5" className={classes.loginHeaderTitle}>
+					Armarinho Admin Login
+				</Typography>
+			</div>
+			<Grid container>
+				<Grid item xs={12} sm={12} md={12}>
+					<TextField
+						className={classes.textFieldStyle}
+						name="email"
+						type="email"
+						variant="outlined"
+						placeholder="Digite seu email"
+						onChange={handleChange}
+					/>
 				</Grid>
-			</Container>
-		</>
+
+				<Grid item xs={12} sm={12} md={12}>
+					<TextField
+						className={classes.textFieldStyle}
+						name="password"
+						type="password"
+						variant="outlined"
+						placeholder="Digite sua senha"
+						onChange={handleChange}
+					/>
+				</Grid>
+
+				<Button
+					variant="contained"
+					type="submit"
+					className={classes.buttonStyle}
+					onClick={handleLoginSubmit}
+				>
+					Login
+				</Button>
+
+				<Typography
+					variant="subtitle1"
+					className={classes.esqueceuSenhaStyle}
+					component={CollisionLink}
+				>
+					Esqueceu a senha?
+				</Typography>
+			</Grid>
+		</Container>
 	);
 };
 

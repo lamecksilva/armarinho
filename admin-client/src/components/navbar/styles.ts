@@ -5,6 +5,13 @@ export default makeStyles((theme: Theme) =>
 		appBarBrandName: {
 			fontFamily: "'Varela Round', sans-serif",
 			marginLeft: theme.spacing(1)
+		},
+		menuButton: {
+			marginRight: theme.spacing(2)
+		},
+		logoutButton: {
+			fontFamily: "'Varela Round', sans-serif",
+			marginLeft: 'auto'
 		}
 	})
 );
