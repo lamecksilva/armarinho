@@ -1,19 +1,16 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import {
-	Paper,
-	Table,
-	TableHead,
-	TableRow,
-	TableCell,
-	TableBody
-} from '@material-ui/core';
+import { Container, Typography, Fab } from '@material-ui/core';
+
+import AddIcon from '@material-ui/icons/Add';
+import useStyles from './styles';
 
 import Axios from '../../utils/api';
+import UsersTable from './table';
 
 interface UserProps extends RouteComponentProps {}
 
-interface User {
+export interface UserType {
 	_id: string;
 	userType: string;
 	name: string;
@@ -22,49 +19,38 @@ interface User {
 	updatedAt: string;
 }
 
-const Users: React.FC<UserProps> = props => {
-	const [users, setUsers] = React.useState<Array<User>>([]);
+export const Users: React.FC<UserProps> = props => {
+	const [users, setUsers] = React.useState<Array<UserType>>([]);
+
+	const classes = useStyles({});
 
 	React.useEffect(() => {
 		async function fetchUsuarios() {
-			await Axios.get('/auth/all')
-				.then(response => {
+			try {
+				const response = await Axios.get('/auth/all');
+
+				if (response) {
 					setUsers(response.data);
-				})
-				.catch(err => console.error(err.response));
+				}
+			} catch (e) {
+				console.error(e.response);
+			}
 		}
 
 		fetchUsuarios();
-	});
+	}, [users.length]);
 
 	return (
-		<Paper style={{ marginTop: '10%', overflowX: 'auto' }}>
-			<Table>
-				<TableHead>
-					<TableRow>
-						<TableCell align="left">id</TableCell>
-						<TableCell align="left">Nome</TableCell>
-						<TableCell align="left">Email</TableCell>
-						<TableCell align="left">Criado Em</TableCell>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{users.map(item => (
-						<TableRow key={item._id}>
-							<TableCell component="th" scope="row">
-								{item._id}
-							</TableCell>
-							<TableCell align="left">{item.name}</TableCell>
-							<TableCell align="left">{item.email}</TableCell>
-							<TableCell align="left">
-								{new Date(item.createdAt).toLocaleDateString('pt-BR')}
-							</TableCell>
-						</TableRow>
-					))}
-				</TableBody>
-			</Table>
-		</Paper>
+		<Container className={classes.root}>
+			<Typography variant="h5" style={{ textAlign: 'center' }}>
+				Usuários
+			</Typography>
+
+			<UsersTable users={users} />
+
+			<Fab color="secondary" className={classes.fab}>
+				<AddIcon />
+			</Fab>
+		</Container>
 	);
 };
-
-export default Users;

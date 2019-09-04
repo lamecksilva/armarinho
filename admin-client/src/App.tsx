@@ -12,7 +12,7 @@ import Login from './components/login';
 import Dashboard from './components/dashboard';
 import Home from './components/home';
 import Navbar from './components/navbar';
-import Users from './components/users';
+import {Users} from './components/users';
 
 class App extends React.Component {
 	render(): JSX.Element {

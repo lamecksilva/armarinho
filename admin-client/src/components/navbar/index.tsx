@@ -19,20 +19,28 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import useStyles from './styles';
 
-import AdapterLink from '../adapterlink';
 import drawerOptions from './drawerOptions';
 
 interface NavbarProps extends RouteComponentProps {}
 
 const Navbar: React.FC<NavbarProps> = props => {
-	const classes = useStyles(props);
-
 	const [drawerOpen, setDrawerOpen] = React.useState(false);
+
+	const classes = useStyles(props);
 
 	const toggleDrawer = (event: React.KeyboardEvent | React.MouseEvent) => {
 		event.preventDefault();
 
 		setDrawerOpen(!drawerOpen);
+	};
+
+	const redirectTo = (to: string) => (
+		event: React.KeyboardEvent | React.MouseEvent
+	) => {
+		event.preventDefault();
+
+		setDrawerOpen(!drawerOpen);
+		props.history.push(to);
 	};
 
 	return (
@@ -69,12 +77,7 @@ const Navbar: React.FC<NavbarProps> = props => {
 				<Divider />
 				<List>
 					{drawerOptions.map(item => (
-						<ListItem
-							button
-							component={AdapterLink}
-							to={item.url}
-							key={item.name}
-						>
+						<ListItem button onClick={redirectTo(item.url)}>
 							<ListItemIcon>{item.icon}</ListItemIcon>
 							<ListItemText primary={item.name} />
 						</ListItem>
