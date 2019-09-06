@@ -25,7 +25,7 @@ const UsersTable: React.FC<UsersTableProps> = props => {
 
 	return (
 		<Paper className={classes.root}>
-			<Table>
+			<Table size="small">
 				<TableHead>
 					<TableRow>
 						<TableCell align="left">Nome</TableCell>
@@ -41,12 +41,12 @@ const UsersTable: React.FC<UsersTableProps> = props => {
 				<TableBody>
 					{props.users.map(item => (
 						<TableRow key={item._id}>
-							<TableCell component="th" scope="row" align="left">
+							<TableCell align="left" component="th" scope="row">
 								{item.name}
 							</TableCell>
 							<TableCell align="left">{item.email}</TableCell>
 							<TableCell align="left">
-								{new Date(item.createdAt).toLocaleDateString('pt-BR')} -
+								{new Date(item.createdAt).toLocaleDateString('pt-BR')}-
 								{new Date(item.createdAt).toLocaleTimeString('pt-BR')}
 							</TableCell>
 							<TableCell>
