@@ -12,5 +12,6 @@
 		// "useCache": true,
 		"useTranspileModule": true
 	},
-	"include": ["./src/**/*"]
+	"include": ["./src/**/*"],
+	"files": ["types.ts"]
 }

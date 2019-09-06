@@ -5,14 +5,19 @@ import {
 	TableHead,
 	TableRow,
 	TableCell,
-	TableBody
+	TableBody,
+	IconButton,
+	Grid
 } from '@material-ui/core';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import useStyles from './styles';
-import { UserType } from '../index';
 
 interface UsersTableProps {
-	users: Array<UserType>;
+	users: Array<User>;
+	onRefreshClick: any;
 }
 
 const UsersTable: React.FC<UsersTableProps> = props => {
@@ -26,6 +31,11 @@ const UsersTable: React.FC<UsersTableProps> = props => {
 						<TableCell align="left">Nome</TableCell>
 						<TableCell align="left">Email</TableCell>
 						<TableCell align="left">Criado Em</TableCell>
+						<TableCell align="center">
+							<IconButton onClick={props.onRefreshClick}>
+								<RefreshIcon />
+							</IconButton>
+						</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -36,7 +46,22 @@ const UsersTable: React.FC<UsersTableProps> = props => {
 							</TableCell>
 							<TableCell align="left">{item.email}</TableCell>
 							<TableCell align="left">
-								{new Date(item.createdAt).toLocaleDateString('pt-BR')}
+								{new Date(item.createdAt).toLocaleDateString('pt-BR')} -
+								{new Date(item.createdAt).toLocaleTimeString('pt-BR')}
+							</TableCell>
+							<TableCell>
+								<Grid container spacing={2}>
+									<Grid item xs={6}>
+										<IconButton>
+											<EditIcon />
+										</IconButton>
+									</Grid>
+									<Grid item xs={6}>
+										<IconButton>
+											<DeleteIcon />
+										</IconButton>
+									</Grid>
+								</Grid>
 							</TableCell>
 						</TableRow>
 					))}

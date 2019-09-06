@@ -77,7 +77,7 @@ const Navbar: React.FC<NavbarProps> = props => {
 				<Divider />
 				<List>
 					{drawerOptions.map(item => (
-						<ListItem button onClick={redirectTo(item.url)}>
+						<ListItem button onClick={redirectTo(item.url)} key={item.url}>
 							<ListItemIcon>{item.icon}</ListItemIcon>
 							<ListItemText primary={item.name} />
 						</ListItem>
