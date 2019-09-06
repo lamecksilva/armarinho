@@ -1,6 +1,14 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { Container, Typography, Fab, Modal, Paper } from '@material-ui/core';
+import {
+	Container,
+	Typography,
+	Fab,
+	Modal,
+	Paper,
+	Button,
+	TextField
+} from '@material-ui/core';
 
 import AddIcon from '@material-ui/icons/Add';
 import useStyles from './styles';
@@ -81,10 +89,20 @@ const Users: React.FC<UserProps> = props => {
 				>
 					<Typography
 						variant="h4"
-						style={{ textAlign: 'center', marginTop: '3em' }}
+						style={{ textAlign: 'center', marginTop: '60px' }}
 					>
 						Adicionar Usuário
 					</Typography>
+
+					<Container>
+						<Button variant="contained">Confirmar</Button>
+						<TextField
+							name="name"
+							placeholder="Digite o nome"
+							label="Nome"
+							variant="outlined"
+						/>
+					</Container>
 				</Paper>
 			</Modal>
 		</Container>
