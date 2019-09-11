@@ -1,25 +1,20 @@
-import express, { Response } from 'express';
-import { start } from 'elastic-apm-node';
+import express from 'express';
+import loaders from './src/loaders';
 
-start({
-	serviceName: 'NameTest',
-	serverUrl: 'http://localhost:8200'
-});
+const startServer = async () => {
+	const app = express();
 
-import applyRoutes from './app';
+	const PORT = process.env.PORT || 9005;
 
-const app = express();
+	await loaders(app);
 
-app.get('/', (_, res: Response) => res.send('Hello from Files-service'));
+	app.listen(PORT, () =>
+		console.info(
+			`${new Date(Date.now()).toLocaleTimeString(
+				'pt-BR'
+			)}Files-Service running on port: ${PORT}`
+		)
+	);
+};
 
-applyRoutes(app);
-
-const PORT = process.env.PORT || 9005;
-
-app.listen(PORT, () =>
-	console.log(
-		`${new Date(Date.now()).toLocaleTimeString(
-			'pt-BR'
-		)}Files-Service running on port: ${PORT}`
-	)
-);
+startServer();
