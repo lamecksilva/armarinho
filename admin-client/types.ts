@@ -6,3 +6,10 @@ type User = {
 	createdAt: string;
 	updatedAt: string;
 };
+
+type NewUserInput = {
+	name: string;
+	email: string;
+	password: string;
+	password2: string;
+};
