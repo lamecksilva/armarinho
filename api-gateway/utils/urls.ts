@@ -6,5 +6,6 @@ export default {
 	filesService: process.env.FILES_SERVICE_URL || 'http://localhost:9005',
 	notificationService:
 		process.env.NOTIFICATION_SERVICE_URL || 'http://localhost:9006',
-	paymentService: process.env.PAYMENT_SERVICE_URL || 'http://localhost:9007'
+	paymentService: process.env.PAYMENT_SERVICE_URL || 'http://localhost:9007',
+	adminClient: process.env.ADMIN_CLIENT || 'http://localhost:3000'
 };

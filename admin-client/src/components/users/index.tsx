@@ -20,6 +20,9 @@ import UsersTable from './table';
 interface UserProps extends RouteComponentProps {}
 
 const Users: React.FC<UserProps> = props => {
+	const classes = useStyles({});
+
+	const [isModalOpen, setIsModalOpen] = React.useState(false);
 	const [users, setUsers] = React.useState<Array<User>>([]);
 	const [fields, setFields] = React.useState<NewUserInput>({
 		name: '',
@@ -27,24 +30,9 @@ const Users: React.FC<UserProps> = props => {
 		password: '',
 		password2: ''
 	});
-	const [isModalOpen, setIsModalOpen] = React.useState(false);
-
-	const classes = useStyles({});
 
 	React.useEffect(() => {
-		async function fetchUsuarios() {
-			try {
-				const response = await Axios.get('/auth/all');
-
-				if (response) {
-					setUsers(response.data);
-				}
-			} catch (e) {
-				console.error(e.response);
-			}
-		}
-
-		fetchUsuarios();
+		fetchData();
 	}, [users.length]);
 
 	const fetchData = async () => {
@@ -94,10 +82,33 @@ const Users: React.FC<UserProps> = props => {
 					`Usuário ${response.data.savedUser.name} criado com sucesso`
 				);
 				setIsModalOpen(!isModalOpen);
+				fetchData();
 			}
 		} catch (err) {
 			console.log(err.response.data);
 			window.alert(err);
+		}
+	};
+
+	const handleDeleteClick = (id: string, name: string) => (
+		event: React.MouseEvent
+	) => {
+		event.preventDefault();
+
+		window.confirm(`Deseja apagar o usuário ${name} ?`) && deleteUser(id);
+	};
+
+	const deleteUser = async (id: string) => {
+		try {
+			const response = await Axios.delete(`/auth/${id}`);
+
+			if (response) {
+				window.alert('Usuário removido com sucesso');
+				fetchData();
+			}
+		} catch (err) {
+			window.alert(err);
+			console.dir(err);
 		}
 	};
 
@@ -107,7 +118,11 @@ const Users: React.FC<UserProps> = props => {
 				Usuários
 			</Typography>
 
-			<UsersTable users={users} onRefreshClick={handleFabClick} />
+			<UsersTable
+				users={users}
+				onRefreshClick={handleFabClick}
+				handleDelete={handleDeleteClick}
+			/>
 
 			<Fab color="secondary" className={classes.fab} onClick={handleAddClick}>
 				<AddIcon />

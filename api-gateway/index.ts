@@ -55,6 +55,10 @@ app.get('/status', async (_, res: Response) => {
 			: 'Offline',
 		paymentService: (await isReachable(urls.paymentService, { timeout: 300 }))
 			? 'Online'
+			: 'Offline',
+
+		adminClient: (await isReachable(urls.adminClient, { timeout: 300 }))
+			? 'Online'
 			: 'Offline'
 	});
 });
