@@ -12,7 +12,7 @@ const startServer = async () => {
 		console.info(
 			`${new Date(Date.now()).toLocaleTimeString(
 				'pt-BR'
-			)}Files-Service running on port: ${PORT}`
+			)} Files-Service running on port: ${PORT}`
 		)
 	);
 };

@@ -1,3 +1,0 @@
-## Mobile
-
-> Mobile App Here
