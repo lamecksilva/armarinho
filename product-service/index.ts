@@ -1,4 +1,6 @@
+require('dotenv').config();
 import express from 'express';
+
 import loaders from './src/loaders';
 
 const startServer = async () => {

@@ -1,5 +1,6 @@
 import { Application } from 'express';
 
+import config from '../config';
 import expressLoader from './express.loader';
 import sequelizeLoader from './sequelize.loader';
 
