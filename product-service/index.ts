@@ -1,9 +1,22 @@
-import express, { Response } from 'express';
+require('dotenv').config();
+import express from 'express';
 
-const app = express();
+import loaders from './src/loaders';
 
-app.get('/', (_, res: Response) => res.send('Hello from Product-service'));
+const startServer = async () => {
+	const app = express();
 
-const PORT = process.env.PORT || 9003;
+	const PORT = process.env.PORT || 9003;
 
-app.listen(PORT, () => console.log(`Product-Service running on port: ${PORT}`));
+	await loaders(app);
+
+	app.listen(PORT, () =>
+		console.info(
+			`${new Date(Date.now()).toLocaleTimeString(
+				'pt-BR'
+			)} Product-Service running on port: ${PORT}`
+		)
+	);
+};
+
+startServer();
