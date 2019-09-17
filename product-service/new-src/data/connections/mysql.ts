@@ -9,8 +9,14 @@ const promisePool = createPool({
 
 const connection = promisePool.promise();
 
-if (connection) {
-	console.log('MYSQL Connected!');
+const result = async function() {
+	const [result] = await connection.query('SELECT 1 + 1 AS result');
+
+	return result;
+};
+
+if (result) {
+	console.log('MYSQL CONNECTED!');
 }
 
 export default connection;

@@ -5,3 +5,4 @@
  * DB Manipulations
  * Queries / Commands
  */
+export * from './repositories';
