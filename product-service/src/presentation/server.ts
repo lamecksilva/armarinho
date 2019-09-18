@@ -11,7 +11,7 @@ import { applyRoutes } from './app';
 export const start = async () => {
 	const app = express();
 
-	const PORT = process.env.PORT || 9000;
+	const PORT = process.env.PORT || 9002;
 
 	await applyRoutes(app);
 

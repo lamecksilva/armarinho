@@ -12,8 +12,6 @@ export const syncTables = async () => {
 			PRIMARY KEY(id)
 	)`);
 
-	// console.log(createProductsTableResult);
-
 	const [createImagensTableResult] = await conn.query(`
 		CREATE TABLE IF NOT EXISTS Images (
 			id INT AUTO_INCREMENT,
@@ -28,5 +26,7 @@ export const syncTables = async () => {
 				ON DELETE CASCADE
 	)`);
 
-	console.log(createImagensTableResult);
+	if (createProductsTableResult && createImagensTableResult) {
+		console.log('Table Sync');
+	}
 };

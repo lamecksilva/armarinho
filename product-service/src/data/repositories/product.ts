@@ -6,15 +6,17 @@ export const getProducts = async () => {
 	return products;
 };
 
+interface inserProductParams {
+	name: string;
+	category: string;
+	size: string;
+}
+
 export const addProduct = async ({
 	name,
 	category,
 	size
-}: {
-	name: string;
-	category: string;
-	size: string;
-}) => {
+}: inserProductParams) => {
 	console.log(name, category, size);
 	const [productCreatedResponse] = await conn.execute(
 		'INSERT INTO Products(name, category, size) VALUES (?, ?, ?)',
