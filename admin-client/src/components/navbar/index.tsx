@@ -70,6 +70,12 @@ const Navbar: React.FC<NavbarProps> = props => {
 				anchor="left"
 			>
 				<div className={classes.toolbar}>
+					<Typography
+						variant="h5"
+						style={{ marginRight: 'auto', marginLeft: '10px' }}
+					>
+						Armarinho
+					</Typography>
 					<IconButton onClick={toggleDrawer}>
 						<ChevronLeftIcon />
 					</IconButton>

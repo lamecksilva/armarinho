@@ -1,7 +1,7 @@
 module.exports = {
 	apps: [
 		{
-			name: 'API-Gateway',
+			name: 'Armarinho-API-Gateway',
 			script: './index.ts',
 			ignore_watch: ['node_modules'],
 			watch: true,

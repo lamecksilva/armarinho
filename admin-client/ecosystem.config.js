@@ -3,7 +3,7 @@ module.exports = {
 		{
 			name: 'Armarinho-Admin-Client',
 			script: 'yarn start',
-			watch: true,
+			watch: false,
 			ignore_watch: ['node_modules']
 		}
 	]

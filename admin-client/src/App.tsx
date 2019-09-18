@@ -13,6 +13,7 @@ import Dashboard from './components/dashboard';
 import Home from './components/home';
 import Navbar from './components/navbar';
 import Users from './components/users';
+import Products from "./components/products"
 
 class App extends React.Component {
 	render(): JSX.Element {
@@ -27,6 +28,7 @@ class App extends React.Component {
 					<Route path="/hello" component={Hello} />
 					<Route path="/dashboard" component={Dashboard} />
 					<Route path="/users" component={Users} />
+					<Route path="/products" component={Products} />
 				</Router>
 			</ThemeProvider>
 		);

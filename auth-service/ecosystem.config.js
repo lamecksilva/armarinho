@@ -1,7 +1,7 @@
 module.exports = {
 	apps: [
 		{
-			name: 'Auth-Service',
+			name: 'Armarinho-Auth-Service',
 			script: './index.ts',
 			watch: true,
 			ignore_watch: ['node_modules'],
