@@ -6,12 +6,27 @@ export const getProducts = async () => {
 	return products;
 };
 
-export const addProduct = async () => {
-	const [newProduct] = await conn.query(
-		'INSERT INTO Products(name, category, size) VALUES ?',
-		[[['Produto teste'], ['Camisa'], ['M']]]
+export const addProduct = async ({
+	name,
+	category,
+	size
+}: {
+	name: string;
+	category: string;
+	size: string;
+}) => {
+	console.log(name, category, size);
+	const [productCreatedResponse] = await conn.query(
+		'INSERT INTO Products(name, category, size) VALUES (?, ?, ?)',
+		[name, category, size]
 	);
 
-	console.log(newProduct);
+	console.log(productCreatedResponse);
+
+	const [newProduct] = await conn.query(
+		'SELECT * FROM Products WHERE name = ? AND category = ? AND size = ?',
+		[[[name, category, size]]]
+	);
+
 	return newProduct;
 };

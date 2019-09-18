@@ -8,11 +8,14 @@ router.get('/', async (req: Request, res: Response) => {
 	const products = await getProducts();
 	console.dir(products);
 
-	return res.json({ success: true });
+	return res.json({ success: true, products });
 });
 
-router.get('/insert', async (req: Request, res: Response) => {
-	const product = await addProduct();
+router.post('/insert', async (req: Request, res: Response) => {
+	const { name, category, size } = req.body;
+	console.log(req.body);
+
+	const product = await addProduct({ name, category, size });
 
 	return res.json({ success: true, product });
 });
