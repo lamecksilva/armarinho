@@ -16,7 +16,7 @@ export const addProduct = async ({
 	size: string;
 }) => {
 	console.log(name, category, size);
-	const [productCreatedResponse] = await conn.query(
+	const [productCreatedResponse] = await conn.execute(
 		'INSERT INTO Products(name, category, size) VALUES (?, ?, ?)',
 		[name, category, size]
 	);
@@ -25,7 +25,7 @@ export const addProduct = async ({
 
 	const [newProduct] = await conn.query(
 		'SELECT * FROM Products WHERE name = ? AND category = ? AND size = ?',
-		[[[name, category, size]]]
+		[name, category, size]
 	);
 
 	return newProduct;
