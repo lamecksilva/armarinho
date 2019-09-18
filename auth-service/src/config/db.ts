@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 // Function to connect app to MongoDB
 export default (): void => {
 	const MONGO_URL =
-		process.env.MONGO_URL || 'mongodb://localhost:27017/ARMARINHO_AUTH_DB';
+		process.env.MONGO_URL ||
+		'mongodb://admin:adminPassword@localhost:27017/ArmarinhoAuthDB';
 
 	if (!MONGO_URL) {
 		throw new Error('MONGO_URL não declarada');

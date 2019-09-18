@@ -5,6 +5,7 @@ import { getProducts, addProduct } from '../../data';
 const router = Router();
 
 router.get('/', async (req: Request, res: Response) => {
+	console.log(req.path)
 	const products = await getProducts();
 	console.dir(products);
 
