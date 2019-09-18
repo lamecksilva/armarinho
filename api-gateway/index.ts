@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 const authServiceProxy = httpProxy(urls.authService);
 const userServiceProxy = httpProxy(urls.userService);
 
-app.get('/', (_, res: Response) => res.send('Hello from API-Gateway'));
+app.get('/', (_, res: Response) => res.send('API Gateway Online'));
 
 app.use('/auth', (req: Request, res: Response, next: NextFunction) => {
 	authServiceProxy(req, res, next);

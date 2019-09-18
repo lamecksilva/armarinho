@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 export default (): void => {
 	const MONGO_URL =
 		process.env.MONGO_URL ||
-		'mongodb://admin:adminPassword@localhost:27017/ArmarinhoAuthDB';
+		'mongodb://admin:adminPassword@localhost:27017/ArmarinhoAuthDB?authSource=admin';
 
 	if (!MONGO_URL) {
 		throw new Error('MONGO_URL não declarada');

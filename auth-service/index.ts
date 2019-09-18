@@ -14,7 +14,7 @@ App(app);
 /**
  * Test Route
  */
-app.get('/', (_, res: Response) => res.send('Hello from AUTH-service'));
+app.get('/', (_, res: Response) => res.send('Auth Service Online'));
 
 /**
  *  Login route

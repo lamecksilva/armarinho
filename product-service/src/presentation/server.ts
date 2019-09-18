@@ -15,8 +15,8 @@ export const start = async () => {
 
 	await applyRoutes(app);
 
-	app.get('/', (req: express.Request, res: express.Response) => {
-		return res.send('Product service online!! ' + req.host);
+	app.get('/', (_: express.Request, res: express.Response) => {
+		return res.send('Product Service Online');
 	});
 
 	app.listen(PORT, () => console.log(`Server Running on PORT: ${PORT}`));
