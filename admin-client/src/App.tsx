@@ -8,12 +8,12 @@ import { hot } from 'react-hot-loader/root';
 import theme from './theme';
 
 import Hello from './components/Hello';
-import Login from './components/login';
-import Dashboard from './components/dashboard';
-import Home from './components/home';
+import Login from './containers/login';
+import Dashboard from './containers/dashboard';
+import Home from './containers/home';
 import Navbar from './components/navbar';
-import Users from './components/users';
-import Products from "./components/products"
+import Users from './containers/users';
+import Products from "./containers/products"
 
 class App extends React.Component {
 	render(): JSX.Element {
