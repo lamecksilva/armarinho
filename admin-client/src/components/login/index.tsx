@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
-import CollisionLink from '../../components/adapterlink';
+import CollisionLink from '../adapterlink';
 import useStyles from './styles';
 
 export interface LoginState {
