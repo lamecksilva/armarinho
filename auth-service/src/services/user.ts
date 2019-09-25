@@ -1,9 +1,16 @@
-import { Request, Response } from 'express';
-
+import { UserRepository } from '../data/repositores/user';
 // import { UserType} from "../domains/index"
 
 export class UserService {
-	async getUsers(_: Request, res: Response) {
-		return res.status(200).json({ message: 'Hello Users' });
+	private readonly repository: UserRepository;
+
+	constructor(repository: UserRepository) {
+		this.repository = repository;
+	}
+
+	async getUsers() {
+		const users = await this.repository.getUsers();
+
+		return users;
 	}
 }
