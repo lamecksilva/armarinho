@@ -3,14 +3,14 @@ require('dotenv').config();
 import express, { Response, Request } from 'express';
 // import { request } from 'graphql-request';
 
-import App from './src';
+// import App from './src';
 import jwtVerify from './src/utils/jwt-verify';
 // import jwtSign from './src/utils/jwt-sign';
 // import jwtDecode from './src/utils/jwt-decode';
 
 const app = express();
 
-App(app);
+// App(app);
 /**
  * Test Route
  */

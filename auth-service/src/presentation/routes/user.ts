@@ -13,6 +13,8 @@ const userRouter = (userService: UserService) => {
 		return res.status(200).json(users);
 	});
 
+	
+
 	return router;
 };
 
