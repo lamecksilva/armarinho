@@ -25,6 +25,10 @@ export class UserRepository {
 
 	// Save user
 	async saveUser(user: User) {
-		return await this._collection.insertOne(user);
+		return await this._collection.insertOne({
+			...user,
+			createdAt: new Date(),
+			updatedAt: new Date()
+		});
 	}
 }

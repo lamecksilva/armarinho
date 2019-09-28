@@ -25,6 +25,9 @@ export class UserService {
 
 		const { ops } = await this.repository.saveUser(user);
 
-		return { user: { ...ops[0], password: null }, errors: {} };
+		return {
+			user: { ...ops[0], password: null },
+			errors: {}
+		};
 	}
 }

@@ -1,13 +1,13 @@
-// import { ObjectID } from 'mongodb';
+import { ObjectID } from 'mongodb';
 
 export interface UserType {
-	// id?: ObjectID;
+	id?: ObjectID;
 	name: string;
 	email: string;
 	userType: string;
 	password: string;
-	// createdAt?: Date;
-	// updatedAt?: Date;
+	createdAt?: Date;
+	updatedAt?: Date;
 }
 
 export class User {
