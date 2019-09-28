@@ -21,7 +21,7 @@ export class User {
 	constructor(user: UserType) {
 		this.name = user.name;
 		this.email = user.email;
-		this.userType = user.userType;
+		this.userType = user.userType !== undefined ? user.userType : 'user';
 		this.password = user.password;
 	}
 }
