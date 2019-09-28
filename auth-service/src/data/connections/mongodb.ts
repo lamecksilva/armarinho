@@ -2,7 +2,8 @@ import { MongoClient, Db } from 'mongodb';
 
 const defaults = {
 	poolSize: 10,
-	useNewUrlParser: true
+	useNewUrlParser: true,
+	useUnifiedTopology: true
 };
 
 interface mongoConnectionType {
@@ -16,6 +17,10 @@ const connect = async (config: mongoConnectionType) => {
 		...defaults,
 		...config.options
 	});
+
+	if (client) {
+		console.log('MongoDB Connected!!');
+	}
 
 	return client.db(config.dbName);
 };

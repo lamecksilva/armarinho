@@ -11,11 +11,20 @@ export class UserRepository {
 		this._collection = connection.collection(User.collection);
 	}
 
-	// async getUsers(): Promise<Array<UserType>> {
-	// 	return this._collection.find({});
-	// }
-
+	// Find all users in DB
 	async getUsers(): Promise<Array<UserType>> {
-		return this._collection.find({}).toArray();
+		return await this._collection
+			.find({}, { projection: { password: 0 } })
+			.toArray();
+	}
+
+	// Find user by email
+	async findUserByEmail(email: string) {
+		return await this._collection.findOne({ email });
+	}
+
+	// Save user
+	async saveUser(user: User) {
+		return await this._collection.insertOne(user);
 	}
 }
