@@ -31,4 +31,17 @@ export class UserRepository {
 			updatedAt: new Date()
 		});
 	}
+
+	// Find user by id
+	async findUserById(id: string) {
+		return await this._collection.findOne({ _id: id });
+	}
+
+	// Find user by id and update
+	async findUserByIdAndUpdate(id: string, data: any) {
+		return await this._collection.findOneAndUpdate(
+			{ _id: id },
+			{ $set: { ...data } }
+		);
+	}
 }

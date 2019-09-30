@@ -21,9 +21,26 @@ const userRouter = (userService: UserService) => {
 		'/',
 		validators.registerUser,
 		async (req: Request, res: Response) => {
-			const newUser = new User(req.body);
+			const { errors, user } = await userService.saveUser(new User(req.body));
 
-			const { errors, user } = await userService.saveUser(newUser);
+			if (!isEmpty(errors)) {
+				return res.status(400).json({ success: false, errors });
+			}
+
+			return res.status(200).json({ success: true, user });
+		}
+	);
+
+	router.put(
+		'/:id',
+		validators.updateUser,
+		async (req: Request, res: Response) => {
+			console.log(req.path);
+
+			const { errors, user } = await userService.updateUser(
+				req.params.id,
+				req.body
+			);
 
 			if (!isEmpty(errors)) {
 				return res.status(400).json({ success: false, errors });

@@ -7,6 +7,15 @@ interface ErrorObject {
 	[key: string]: string;
 }
 
+/**
+ * registerUser
+ *
+ * Middleware to validate register user route
+ *
+ * @param req
+ * @param res
+ * @param next
+ */
 export const registerUser = (
 	req: Request,
 	res: Response,
@@ -53,6 +62,52 @@ export const registerUser = (
 		errors.password2 = 'As senhas devem ser iguais';
 	}
 
+	if (isEmpty(errors)) {
+		return next();
+	} else {
+		return res.status(400).json({ success: false, errors });
+	}
+};
+
+/**
+ * updateUser
+ *
+ * Middleware to validate update user route
+ *
+ * @param req
+ * @param res
+ * @param next
+ */
+export const updateUser = (req: Request, res: Response, next: NextFunction) => {
+	let errors: ErrorObject = {};
+	const data: any = req.body;
+
+	data.name = isEmpty(data.name) ? '' : data.name;
+	data.email = isEmpty(data.email) ? '' : data.email;
+
+	console.log(req.params);
+	console.log(req.body);
+
+	// Lenght validations
+	if (!isLength(data.name, { min: 2, max: 40 })) {
+		errors.name = 'O nome deve conter entre 2 e 40 caracteres';
+	}
+
+	if (!isEmail(data.email)) {
+		errors.email = 'Endereço de email inválido';
+	}
+
+	if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+		errors.id = 'ID inválido';
+	}
+
+	if (isEmpty(data.email)) {
+		errors.email = 'O campo email não pode ser vazio';
+	}
+
+	if (isEmpty(data.name)) {
+		errors.name = 'O campo nome não pode ser vazio';
+	}
 	if (isEmpty(errors)) {
 		return next();
 	} else {

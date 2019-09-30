@@ -30,4 +30,22 @@ export class UserService {
 			errors: {}
 		};
 	}
+
+	async updateUser(id: string, data: any) {
+		if (await this.repository.findUserById(id)) {
+			return {
+				user: {},
+				errors: { id: 'Nenhum usuário encontrado para este ID' }
+			};
+		}
+		console.log(await this.repository.findUserById(id));
+
+		const result = await this.repository.findUserByIdAndUpdate(id, data);
+
+		console.log(await this.repository.findUserById(id));
+		return {
+			user: { ...result },
+			errors: {}
+		};
+	}
 }
