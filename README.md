@@ -37,6 +37,9 @@ pm2 start --name "Armarinho-User-Service" src/index.ts --watch
 
 ![image](https://user-images.githubusercontent.com/31391753/62387716-c7b40700-b531-11e9-8984-ef26583eadb7.png)
 
+With Redis:
+![image](https://user-images.githubusercontent.com/31391753/66433211-38761480-e9f6-11e9-9fe4-591464eda743.png)
+
 ```js
 Login =>
 {

@@ -27,6 +27,13 @@ module.exports = {
 			watch: true,
 			ignore_watch: ['node_modules'],
 			log_date_format: 'DD-MM-YYYY HH:mm Z'
+		},
+		{
+			name: 'Files-Service',
+			script: './files-service/index.ts',
+			watch: true,
+			ignore_watch: ['node_modules', 'static'],
+			log_date_format: 'DD-MM-YYYY HH:mm Z'
 		}
 	]
 };
