@@ -1,7 +1,7 @@
 import { isEmail, isLength, equals as isEquals } from 'validator';
 import { Types } from 'mongoose';
 
-import isEmpty from '../utils/is-empty';
+import isEmpty from '../utils/modules/is-empty';
 import { ErrorObject, ValidationResponse } from './types';
 
 //==================================================================================================

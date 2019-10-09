@@ -10,12 +10,23 @@ export class UserService {
 		this.repository = repository;
 	}
 
+	/**
+	 * Return all users
+	 */
 	async getUsers() {
 		const users = await this.repository.getUsers();
 
 		return users;
 	}
 
+	/**
+	 * saveUser
+	 *
+	 * save a user in DB
+	 *
+	 * @param {User} user
+	 *
+	 */
 	async saveUser(user: User) {
 		if (await this.repository.findUserByEmail(user.email)) {
 			return { user: {}, errors: { email: 'Email já cadastrado' } };

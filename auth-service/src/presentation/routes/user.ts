@@ -1,13 +1,14 @@
 import { Router, Request, Response } from 'express';
 
-import isEmpty from '../../utils/is-empty';
+import isEmpty from '../../utils/modules/is-empty';
 import { UserService } from '../../services/user';
 import * as validators from '../../utils/validations';
 import { User } from '../../domains';
 
 const router = Router();
 
-const userRouter = (userService: UserService) => {
+// User routes
+export const userRouter = (userService: UserService) => {
 	router.get('/', async (req: Request, res: Response) => {
 		console.log(req.method, req.path);
 
@@ -52,5 +53,3 @@ const userRouter = (userService: UserService) => {
 
 	return router;
 };
-
-export default userRouter;

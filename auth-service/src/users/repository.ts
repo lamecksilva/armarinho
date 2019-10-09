@@ -2,7 +2,7 @@ import { hash, compare } from 'bcrypt';
 
 import User from './model';
 import { SaveUserType, ErrorObject } from './types';
-import jwtSign from '../utils/jwt-sign';
+import jwtSign from '../utils/modules/jwt-sign';
 
 // =================================================================================================
 /**
