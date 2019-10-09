@@ -42,6 +42,14 @@ export class UserService {
 		};
 	}
 
+	/**
+	 * updateUser
+	 *
+	 * Update a user by id
+	 *
+	 * @param id
+	 * @param data
+	 */
 	async updateUser(id: string, data: any) {
 		if (await this.repository.findUserById(id)) {
 			return {

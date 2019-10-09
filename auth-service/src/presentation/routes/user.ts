@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 
-import isEmpty from '../../utils/modules/is-empty';
-import { UserService } from '../../services/user';
+import { isEmpty } from '../../utils';
+import { UserService } from '../../services';
 import * as validators from '../../utils/validations';
 import { User } from '../../domains';
 

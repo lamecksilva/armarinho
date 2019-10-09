@@ -14,7 +14,7 @@ import {
 	removeUser,
 	validateUser
 } from './repository';
-import isEmpty from '../utils/modules/is-empty';
+import { isEmpty } from '../utils';
 
 //==================================================================================================
 /**
