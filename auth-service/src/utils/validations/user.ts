@@ -1,7 +1,7 @@
 import { isLength, isEmail, equals as isEquals } from 'validator';
 import { Request, Response, NextFunction } from 'express';
 
-import isEmpty from '../modules/is-empty';
+import { isEmpty } from '../modules';
 
 interface ErrorObject {
 	[key: string]: string;
