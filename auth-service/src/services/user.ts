@@ -19,6 +19,12 @@ export class UserService {
 		return users;
 	}
 
+	async getUser(id: string) {
+		const user = await this.repository.findUserById(id);
+
+		return user;
+	}
+
 	/**
 	 * saveUser
 	 *
@@ -51,19 +57,28 @@ export class UserService {
 	 * @param data
 	 */
 	async updateUser(id: string, data: any) {
-		if (await this.repository.findUserById(id)) {
+		if (!(await this.repository.findUserById(id))) {
 			return {
 				user: {},
 				errors: { id: 'Nenhum usuário encontrado para este ID' }
 			};
 		}
-		console.log(await this.repository.findUserById(id));
 
-		const result = await this.repository.findUserByIdAndUpdate(id, data);
+		const { ok } = await this.repository.findUserByIdAndUpdate(id, data);
 
-		console.log(await this.repository.findUserById(id));
+		if (ok !== 1) {
+			return {
+				user: {},
+				errors: {
+					id: 'Ocorreu um erro ao atualizar o usuário'
+				}
+			};
+		}
+
+		const userUpdated = await this.repository.findUserById(id);
+
 		return {
-			user: { ...result },
+			user: { ...userUpdated },
 			errors: {}
 		};
 	}

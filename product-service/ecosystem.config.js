@@ -4,7 +4,8 @@ module.exports = {
 			name: 'Armarinho-Product-Service',
 			script: './src/index.ts',
 			watch: true,
-			ignore_watch: ['node_modules']
+			ignore_watch: ['node_modules'],
+			log_date_format: 'DD-MM-YYYY HH:mm Z'
 		}
 	]
 };

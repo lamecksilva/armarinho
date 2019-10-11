@@ -29,5 +29,5 @@ export const app = async (app: Application) => {
 	 * Auth service, routes/controllers
 	 */
 	const authService = new AuthService(userRepository);
-	app.use('/auth', authRoutes(authService));
+	app.use('/login', authRoutes(authService));
 };

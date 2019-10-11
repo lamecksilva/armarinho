@@ -1,6 +1,6 @@
 ### Todo
 
-- [ ] Pm2
+- [x] Pm2
 - [ ] Objeto de erro (log, email, etc)
 - [ ] Enviar email (nodemailer, etc)
 - [ ] Logger

@@ -1,4 +1,4 @@
-import { Collection, Db } from 'mongodb';
+import { Collection, Db, ObjectId } from 'mongodb';
 
 import { User, UserType } from '../../domains/user/User';
 
@@ -58,7 +58,7 @@ export class UserRepository {
 	 * @param id
 	 */
 	async findUserById(id: string) {
-		return await this._collection.findOne({ _id: id });
+		return await this._collection.findOne({ _id: new ObjectId(id) });
 	}
 
 	/**
@@ -69,8 +69,9 @@ export class UserRepository {
 	 */
 	async findUserByIdAndUpdate(id: string, data: any) {
 		return await this._collection.findOneAndUpdate(
-			{ _id: id },
-			{ $set: { ...data } }
+			{ _id: new ObjectId(id) },
+			{ $set: { ...data } },
+			{ projection: { password: 0 } }
 		);
 	}
 }

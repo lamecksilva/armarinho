@@ -2,14 +2,14 @@ module.exports = {
 	apps: [
 		{
 			name: 'Armarinho-API-Gateway',
-			script: './api-gateway/index.ts',
+			script: 'ts-node api-gateway/index.ts',
 			watch: true,
 			ignore_watch: ['node_modules'],
 			log_date_format: 'DD-MM-YYYY HH:mm Z'
 		},
 		{
 			name: 'Armarinho-Auth-Service',
-			script: './auth-service/index.ts',
+			script: 'ts-node auth-service/index.ts',
 			watch: true,
 			ignore_watch: ['node_modules'],
 			log_date_format: 'DD-MM-YYYY HH:mm Z'
@@ -23,14 +23,14 @@ module.exports = {
 		},
 		{
 			name: 'Armarinho-Product-Service',
-			script: './product-service/src/index.ts',
+			script: 'ts-node product-service/src/index.ts',
 			watch: true,
 			ignore_watch: ['node_modules'],
 			log_date_format: 'DD-MM-YYYY HH:mm Z'
 		},
 		{
 			name: 'Files-Service',
-			script: './files-service/index.ts',
+			script: 'ts-node files-service/index.ts',
 			watch: true,
 			ignore_watch: ['node_modules', 'static'],
 			log_date_format: 'DD-MM-YYYY HH:mm Z'

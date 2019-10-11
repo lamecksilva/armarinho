@@ -17,6 +17,14 @@ export const userRouter = (userService: UserService) => {
 		return res.status(200).json(users);
 	});
 
+	router.get('/:id', async (req: Request, res: Response) => {
+		console.log('Get user by id');
+
+		const user = await userService.getUser(req.params.id);
+
+		return res.json(user);
+	});
+
 	// Register a new user
 	router.post(
 		'/',
@@ -36,8 +44,6 @@ export const userRouter = (userService: UserService) => {
 		'/:id',
 		validators.updateUser,
 		async (req: Request, res: Response) => {
-			console.log(req.path);
-
 			const { errors, user } = await userService.updateUser(
 				req.params.id,
 				req.body

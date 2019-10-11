@@ -19,7 +19,7 @@ export const authRoutes = (authService: AuthService) => {
 	/**
 	 * POST /auth/login
 	 */
-	router.post('/login', async (req: Request, res: Response) => {
+	router.post('/', async (req: Request, res: Response) => {
 		const { errors, token } = await authService.loginUser({
 			email: req.body.email,
 			password: req.body.password
