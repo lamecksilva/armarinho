@@ -1,0 +1,34 @@
+---------------------- Administrador WEB ------------------------
+
+- Login
+
+- Dash board
+
+- Produtos
+  - Adicionar, editar, excluir
+  - Pedidos
+
+- Usuários
+  - Criar, editar, excluir
+
+- Financeiro
+  - Entrada, Saída
+  - Total estimado (Cartao / Dinheiro)
+  - Gastos 
+
+- Relatórios
+  - Geral
+  - Produtos (Entrada, Saída, Pedidos)
+  - Financeiro (Entrada, Saída, Gastos)
+
+------------------------ PDV -------------------------------
+
+- Login
+
+- Nova compra
+  - Código do produto
+  - Quantidade
+  - Forma de Pagamento
+
+- Produtos
+  - Listar Produtos
